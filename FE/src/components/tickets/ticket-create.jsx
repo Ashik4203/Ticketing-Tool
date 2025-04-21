@@ -1,0 +1,300 @@
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
+import "sweetalert2/dist/sweetalert2.min.css";
+
+import { apiService } from "../../services/apiService";
+import "../../style/tickets/ticket-create.css";
+
+// Toast Notification Setup
+const Toast = Swal.mixin({
+  toast: true,
+  position: "top-start",
+  showConfirmButton: false,
+  timer: 3000,
+  timerProgressBar: true,
+  background: "rgba(30,30,60,0.95)",
+  color: "#fff",
+  customClass: {
+    popup: "toast-modern",
+    title: "toast-modern__title",
+    icon: "toast-modern__icon",
+  },
+});
+
+const Create = () => {
+  const [projects, setProjects] = useState([]);
+  const [formValues, setFormValues] = useState({
+    project_id: "",
+    module: "",
+    subject: "",
+    category: "",
+    source: "",
+    due_date: "",
+    behalf_of: "",
+    attachment: null,
+    problem_description: "",
+    priority_status: "",
+  });
+
+  const navigate = useNavigate();
+
+  const staticFormData = {
+    modules: ["Module A", "Module B", "Module C"],
+    categories: ["Category 1", "Category 2", "Category 3"],
+    sources: ["Email", "Phone", "Web"],
+    priorityStatuses: ["Low", "Medium", "High"],
+  };
+
+  useEffect(() => {
+    const fetchProjects = async () => {
+      try {
+        const response = await apiService.get("api/projects");
+        if (response.data) {
+          setProjects(response.data);
+        }
+      } catch (error) {
+        console.error("Error fetching projects:", error);
+        Toast.fire({
+          icon: "error",
+          title: "Failed to load projects.",
+        });
+      }
+    };
+
+    fetchProjects();
+  }, []);
+
+  const handleChange = (e) => {
+    const { name, value, files } = e.target;
+    if (name === "attachment") {
+      setFormValues((prev) => ({
+        ...prev,
+        attachment: files[0] || null,
+      }));
+    } else {
+      setFormValues((prev) => ({
+        ...prev,
+        [name]: value,
+      }));
+    }
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const formData = new FormData();
+    for (let key in formValues) {
+      formData.append(key, formValues[key]);
+    }
+
+    try {
+      const response = await apiService.post("/api/tickets", formData, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
+
+      if (response.ticketId) {
+        Toast.fire({
+          icon: "success",
+          title: "Ticket created successfully!",
+        });
+        setTimeout(() => navigate("/ticket"), 2500);
+      } else {
+        Toast.fire({
+          icon: "error",
+          title: "Failed to create ticket.",
+        });
+      }
+    } catch (error) {
+      console.error("Error submitting ticket:", error);
+      Toast.fire({
+        icon: "error",
+        title: "Something went wrong. Please try again.",
+      });
+    }
+  };
+
+  return (
+    <div className="form-container">
+      <form className="ticket-form" onSubmit={handleSubmit}>
+        <h2>Create Ticket</h2>
+        <div className="ticket-cont-Details">
+          {/* Project and Module Section */}
+          <div className="row">
+            <div className="form-group">
+              <label>
+                Project <span>*</span>
+              </label>
+              <select
+                name="project_id"
+                value={formValues.project_id}
+                onChange={handleChange}
+                required
+              >
+                <option value="">Select Project</option>
+                {projects.map((project) => (
+                  <option key={project.id} value={project.id}>
+                    {project.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            <div className="form-group">
+              <label>
+                Module <span>*</span>
+              </label>
+              <select
+                name="module"
+                value={formValues.module}
+                onChange={handleChange}
+                required
+              >
+                <option value="">Select Module</option>
+                {staticFormData.modules.map((module, index) => (
+                  <option key={index} value={module}>
+                    {module}
+                  </option>
+                ))}
+              </select>
+            </div>
+          </div>
+
+          {/* Subject and Problem Description Section */}
+          <div className="row">
+            <div className="form-group">
+              <label>
+                Subject <span>*</span>
+              </label>
+              <textarea
+                name="subject"
+                value={formValues.subject}
+                onChange={handleChange}
+                required
+              ></textarea>
+            </div>
+
+            <div className="form-group">
+              <label>Problem Description</label>
+              <textarea
+                name="problem_description"
+                value={formValues.problem_description}
+                onChange={handleChange}
+              ></textarea>
+            </div>
+          </div>
+
+          {/* Source and Due Date Section */}
+          <div className="row">
+            <div className="form-group">
+              <label>
+                Source <span>*</span>
+              </label>
+              <select
+                name="source"
+                value={formValues.source}
+                onChange={handleChange}
+                required
+              >
+                <option value="">Select Source</option>
+                {staticFormData.sources.map((source, index) => (
+                  <option key={index} value={source}>
+                    {source}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            <div className="form-group">
+              <label>
+                Due Date <span>*</span>
+              </label>
+              <input
+                type="date"
+                name="due_date"
+                value={formValues.due_date}
+                onChange={handleChange}
+                required
+              />
+            </div>
+          </div>
+
+          {/* Behalf Of and Attachment Section */}
+          <div className="row">
+            <div className="form-group">
+              <label>Behalf Of</label>
+              <input
+                type="text"
+                name="behalf_of"
+                value={formValues.behalf_of}
+                onChange={handleChange}
+              />
+            </div>
+
+            <div className="form-group">
+              <label>Attachment</label>
+              <input type="file" name="attachment" onChange={handleChange} />
+            </div>
+          </div>
+
+          {/* Category and Priority Status Section */}
+          <div className="row">
+            <div className="form-group">
+              <label>
+                Category <span>*</span>
+              </label>
+              <select
+                name="category"
+                value={formValues.category}
+                onChange={handleChange}
+                required
+              >
+                <option value="">Select Category</option>
+                {staticFormData.categories.map((category, index) => (
+                  <option key={index} value={category}>
+                    {category}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            <div className="form-group">
+              <label>
+                Priority Status <span>*</span>
+              </label>
+              <select
+                name="priority_status"
+                value={formValues.priority_status}
+                onChange={handleChange}
+                required
+              >
+                <option value="">Select Priority</option>
+                {staticFormData.priorityStatuses.map((status, index) => (
+                  <option key={index} value={status}>
+                    {status}
+                  </option>
+                ))}
+              </select>
+            </div>
+          </div>
+
+          {/* Buttons Section */}
+          <div className="button-group">
+            <button
+              type="button"
+              className="cancel-btn"
+              onClick={() => navigate("/ticket")}
+            >
+              Cancel
+            </button>
+            <button type="submit" className="submit-btn">
+              Submit
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  );
+};
+
+export default Create;

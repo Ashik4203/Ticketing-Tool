@@ -1,0 +1,63 @@
+/* Header container */
+.header {
+    background-color: #ffffff;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .header-container{
+    display: flex;
+    flex-direction: row;
+    gap : 975
+
+  }
+  
+  /* Logo */
+  .logo img {
+    height: 40px;
+  }
+  
+  /* Icon buttons */
+  .icons {
+    display: flex;
+    gap: 20px;
+  }
+  
+  .icon-btn {
+    background: none;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+    color: white;
+    transition: color 0.3s ease;
+  }
+  
+  .icon-btn:hover {
+    color: #001652;
+  }
+
+  .img{
+    width: 30px;
+    height: 30px;
+  }
+  
+  /* Profile button */
+  .profile-btn {
+    background-color: #F5F5F5;
+    border: none;
+    color: #20409A;
+    font-size: 25px;
+    font-weight: bold;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  
+  .profile-btn:hover {
+    background-color: #98b4ff;
+  }
+  

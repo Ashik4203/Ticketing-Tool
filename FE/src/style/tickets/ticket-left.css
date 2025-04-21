@@ -1,0 +1,321 @@
+.TicketBox {
+    justify-content: flex-start;
+    align-items: center;
+    height: 100vh; /* Full viewport height */
+    overflow: hidden; /* Prevent scrolling for the entire TicketBox */
+  }
+  
+  .Ticket-Container {
+    gap: 20px;
+    height: calc(95vh - 100px); /* Adjust height as needed */
+    overflow-y: auto; /* Enable vertical scrolling */
+    padding-right: 10px; /* Add padding to prevent scrollbar overlap */
+  }
+  
+  .TicketDetails {
+    width: 98%;
+    height: fit-content;
+    padding: 2px 10px;
+    background: #fbfbfb;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    box-shadow: 0 1px 2px 0 #6e6e95, 0 0px 0px 0 #515255;
+    margin-top: 10px;
+  }
+  
+  .Top-Text {
+    display: flex;
+    flex-direction: row;
+    gap: 115px;
+    font-family: 'Work Sans', sans-serif;
+    font-size: 14px;
+    padding-top: 5px;
+  }
+  
+  .Ticket-No-Bg {
+    background: #ebebeb;
+    border-radius: 4px;
+    padding: 0 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .Ticket-No {
+    color: #3a2685;
+    font-size: 14px;
+    font-family: 'Work Sans', sans-serif;
+    font-weight: 600;
+    line-height: 20px;
+  }
+  
+  .TicketName {
+    color: #2f3a5f !important;
+    font-family: 'Work Sans', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+  }
+  
+  .Description {
+    color: #2f3a5f !important;
+    font-family: 'Work Sans', sans-serif;
+    font-weight: 300;
+    font-size: 0.9rem;
+  }
+  
+  .StatusColor {
+    width: 111px;
+    height: 20px;
+    border-radius: 20px;
+    text-align: center;
+    color: white;
+    font-weight: bold;
+    line-height: 20px;
+    font-size: 12px;
+  }
+  
+  .status-green {
+    background: linear-gradient(90deg, #95fe9c 0%, #48c150 100%);
+  }
+  
+  .status-blue {
+    background: linear-gradient(90deg, #84d4ff 0%, #0099ff 100%);
+  }
+  
+  .status-yellow {
+    background: linear-gradient(90deg, #fff78c 0%, #f3ca2c 100%);
+  }
+  
+  .status-orange {
+    background: linear-gradient(90deg, #ffc185 0%, #ff9800 100%);
+  }
+  
+  .status-purple {
+    background: linear-gradient(90deg, #d3a4ff 0%, #9b59b6 100%);
+  }
+  
+  .status-red {
+    background: linear-gradient(90deg, #ff9696 0%, #ff4e4e 100%);
+  }
+  
+  .status-default {
+    background: #ddd;
+    color: #000;
+  }
+  
+
+  .bottomDetailsbtn{
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+    align-items: center;
+  }
+  
+  .AssignDetails {
+    padding: 12px 12px 12px 0px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 5px;
+  }
+  
+  .Column {
+    display: inline-flex;
+    flex-direction: column;
+    gap: 13px;
+  }
+  
+  .Text {
+    color: #2e2e2e;
+    font-size: 13px;
+    font-family: 'Work Sans', sans-serif;
+    font-weight: 200;
+    width: 110px;
+  }
+  .Text1{
+    color: #727070;
+    font-size: 13px;
+    font-family: 'Work Sans', sans-serif;
+    font-weight: 200;
+    width: 110px;
+  }
+
+  .eye-icon {
+    width: 24px;
+    height: 24px;
+  }
+  
+  .btn {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+  }
+  
+  .btn-assign,.btn-Aknow,.btn-inpro,.btn-resolved,.btn-close{
+    width: fit-content;
+    height: 25px;
+    background-color: #003e4b;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+
+  .btn-view {
+    width: fit-content;
+    height: 25px;
+    background-color: #fbfbfb;
+    color: white;
+    border: 1px solid #449362;
+    padding: 2px 5px;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+
+  /* Center the pagination controls */
+.pagination {
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    gap: 10px; /* Space between buttons and text */
+    padding-top: 20px;
+  }
+  
+  /* Style the buttons */
+  .pagination button {
+    color: #ffffff;
+    background: #20409a;
+    border: none; /* Remove default border */
+    padding: 2px 6px; /* Add padding */
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor on hover */
+    font-family: 'Work Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 900;
+  }
+  
+  .pagination button:disabled {
+    position: relative;
+    pointer-events: none; /* Prevent interactions */
+    opacity: 0.6; /* Reduce visibility to indicate disabled state */
+}
+
+/* Add "Disabled" text */
+.pagination button:disabled::after {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 12px;
+    font-weight: bold;
+    color: #727272; /* Adjust color as needed */
+    background: rgba(255, 255, 255, 0.8);
+    padding: 2px 6px;
+}
+
+  
+  /* Hover effect for buttons */
+  .pagination button:not(:disabled):hover {
+    color: #15306f; /* Darker blue on hover */
+  }
+
+  /* Popup Styles */
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.popup-content {
+  background: #fff;
+  padding: 20px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  max-width: 800px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.popup-close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: #333;
+}
+
+.popup-close-button:hover {
+  color: #000;
+}
+
+/* Popup Styles with Right-Side Transition */
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: flex-end; /* Align popup to the right */
+  align-items: center;
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.5s ease, visibility 0.5s ease; /* Slower transition for overlay */
+}
+
+.popup-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.popup-content {
+  background: #fff;
+  padding: 40px 10px 20px 10px;
+  box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1); /* Shadow on the left */
+  width: 520px; /* Adjust width as needed */
+  height: 100vh; /* Full height */
+  overflow-y: auto;
+  position: relative;
+  transform: translateX(100%); /* Start off-screen to the right */
+  transition: transform 0.5s ease; /* Slower transition for sliding */
+}
+
+.popup-overlay.active .popup-content {
+  transform: translateX(0); 
+}
+
+/* Close button styles */
+.popup-close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: #F36F21;
+}
+
+.popup-close-button:hover {
+  color: #20409A;
+}
+.NoTickets {
+  padding: 30px;
+  text-align: center;
+  font-size: 21px;
+  color: #666; /* Optional: subtle gray for better UX */
+}
