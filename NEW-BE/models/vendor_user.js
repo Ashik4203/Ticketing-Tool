@@ -37,7 +37,7 @@ module.exports = (sequelize, DataTypes) => {
       updated_at: {
         type: DataTypes.DATE,
         allowNull: true
-      }
+      },
     }, {
       tableName: 'vendor_users',
       timestamps: false

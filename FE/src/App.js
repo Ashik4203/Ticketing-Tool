@@ -24,6 +24,7 @@ function App() {
         <Route path="/ticket/createticket" element={<ProtectedRoute><CreateTicket /></ProtectedRoute>} />
         <Route path="/ticket/createticket/viewticket" element={<ProtectedRoute><ViewTicket /></ProtectedRoute>} />
         <Route path="/ticket/createticket/closeticket" element={<ProtectedRoute><CloseTicket /></ProtectedRoute>} />
+        <Route path="/report" element={<ProtectedRoute><Report /></ProtectedRoute>} />
       </Routes>
     </Router>
   );

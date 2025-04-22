@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import "sweetalert2/dist/sweetalert2.min.css";
-
+import { FaCalendarAlt } from "react-icons/fa";
+import DatePicker from "react-datepicker"; // Importing React DatePicker
+import "react-datepicker/dist/react-datepicker.css"; // Import the default styles
 import { apiService } from "../../services/apiService";
 import "../../style/tickets/ticket-create.css";
 
@@ -38,6 +40,7 @@ const Create = () => {
   });
 
   const navigate = useNavigate();
+  const datepickerRef = useRef(null);
 
   const staticFormData = {
     modules: ["Module A", "Module B", "Module C"],
@@ -80,6 +83,13 @@ const Create = () => {
     }
   };
 
+  const handleDateChange = (date) => {
+    setFormValues((prev) => ({
+      ...prev,
+      due_date: date,
+    }));
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -117,7 +127,7 @@ const Create = () => {
   return (
     <div className="form-container">
       <form className="ticket-form" onSubmit={handleSubmit}>
-        <h2>Create Ticket</h2>
+        <h2 className="ticket-formh2">Create Ticket</h2>
         <div className="ticket-cont-Details">
           {/* Project and Module Section */}
           <div className="row">
@@ -205,16 +215,22 @@ const Create = () => {
               </select>
             </div>
 
-            <div className="form-group">
+            <div className="form-group datepicker-wrapper">
               <label>
                 Due Date <span>*</span>
               </label>
-              <input
-                type="date"
-                name="due_date"
-                value={formValues.due_date}
-                onChange={handleChange}
+              <DatePicker
+                selected={formValues.due_date}
+                onChange={handleDateChange}
+                dateFormat="yyyy-MM-dd"
+                placeholderText="Select Due Date"
+                className="custom-date-picker"
                 required
+                ref={datepickerRef}
+              />
+              <FaCalendarAlt
+                className="datepicker-icon"
+                onClick={() => datepickerRef.current.setFocus()}
               />
             </div>
           </div>

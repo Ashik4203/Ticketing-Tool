@@ -13,7 +13,7 @@ import {
 } from "recharts";
 import badgeImg from "../assets/fi-rs-badge.png";
 import bookImg from "../assets/fi-rs-book.png";
-import diplomaImg from "../assets/fi-rs-diploma.png";
+import diplomaImg from "../assets/total-tickets.png";
 import { apiService } from "../services/apiService"; // API service
 
 const Dashboard = () => {
@@ -58,7 +58,7 @@ const Dashboard = () => {
       <h2 className="heading">Dashboard</h2>
       <div className="cards">
         <div className="card total-tickets">
-          <div className="icon-container">
+          <div className="icon-container1">
             <img className="first-icon" src={diplomaImg} alt="Total Tickets" />
           </div>
           <div className="ticket-name">
@@ -67,7 +67,7 @@ const Dashboard = () => {
           </div>
         </div>
         <div className="card open-tickets">
-          <div className="icon-container">
+          <div className="icon-container2">
             <img className="first-icon" src={bookImg} alt="Open Tickets" />
           </div>
           <div className="ticket-name">
@@ -76,7 +76,7 @@ const Dashboard = () => {
           </div>
         </div>
         <div className="card closed-tickets">
-          <div className="icon-container">
+          <div className="icon-container3">
             <img className="first-icon" src={badgeImg} alt="Closed Tickets" />
           </div>
           <div className="ticket-name">

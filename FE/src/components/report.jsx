@@ -158,6 +158,7 @@ export const Report = () => {
             placeholderText="Select Date Range"
             onClickOutside={() => setIsOpen(false)}
             open={isOpen}
+            onClick={() => setIsOpen(!isOpen)}
           />
           <FaCalendarAlt
             className="calendar-icon"
@@ -228,22 +229,24 @@ export const Report = () => {
       </div>
 
       {/* Pagination Controls */}
-      <div className="pagination">
-        <button
-          onClick={() => handlePageChange(currentPage - 1)}
-          disabled={currentPage === 1}
-        >
-          &laquo; {/* Left double angle quotation mark */}
-        </button>
+      <div className="pagination-report">
         <span>
           Page {currentPage} of {totalPages}
         </span>
         <button
+          onClick={() => handlePageChange(currentPage - 1)}
+          disabled={currentPage === 1}
+        >
+          {" "}
+          <h4 className="pagination-h4">Prev</h4>
+        </button>
+
+        <button
           onClick={() => handlePageChange(currentPage + 1)}
           disabled={currentPage >= totalPages}
         >
-          &raquo; {/* Right double angle quotation mark */}
-        </button>
+            <h4 className="pagination-h4">Next</h4>
+            </button>
       </div>
     </div>
   );

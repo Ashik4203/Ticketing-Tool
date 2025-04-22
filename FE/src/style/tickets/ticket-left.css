@@ -174,53 +174,54 @@
     border-radius: 5px;
   }
 
-  /* Center the pagination controls */
+
+/* Pagination Container */
 .pagination {
-    display: flex;
-    justify-content: center; /* Center horizontally */
-    align-items: center; /* Center vertically */
-    gap: 10px; /* Space between buttons and text */
-    padding-top: 20px;
-  }
-  
-  /* Style the buttons */
-  .pagination button {
-    color: #ffffff;
-    background: #20409a;
-    border: none; /* Remove default border */
-    padding: 2px 6px; /* Add padding */
-    border-radius: 5px; /* Rounded corners */
-    cursor: pointer; /* Pointer cursor on hover */
-    font-family: 'Work Sans', sans-serif;
-    font-size: 15px;
-    font-weight: 900;
-  }
-  
-  .pagination button:disabled {
-    position: relative;
-    pointer-events: none; /* Prevent interactions */
-    opacity: 0.6; /* Reduce visibility to indicate disabled state */
+  display: flex;
+  justify-content: right;
+  align-items: center;
+  gap: 8px;
+  padding-top: 40px;
+  flex-wrap: wrap;
 }
 
-/* Add "Disabled" text */
-.pagination button:disabled::after {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 12px;
-    font-weight: bold;
-    color: #727272; /* Adjust color as needed */
-    background: rgba(255, 255, 255, 0.8);
-    padding: 2px 6px;
+/* Pagination Buttons */
+.pagination-btn {
+  width: 52px;
+  height: 32px;
+  background-color: #003e4b;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-family: 'Work Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  text-align: center;
+  line-height: 32px;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+
+
+/* Disabled Button */
+.pagination-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Page Info Text */
+.pagination-h4 {
+  font-family: 'Work Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: #ffffff;
+  margin: -1px 0px 0px 1px;
+    align-self: center;
 }
 
   
-  /* Hover effect for buttons */
-  .pagination button:not(:disabled):hover {
-    color: #15306f; /* Darker blue on hover */
-  }
-
   /* Popup Styles */
 .popup-overlay {
   position: fixed;

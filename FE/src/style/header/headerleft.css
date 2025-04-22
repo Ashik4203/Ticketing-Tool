@@ -18,6 +18,13 @@
   .logo img {
     height: 40px;
   }
+  .logo {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+  }
+  
   
   /* Icon buttons */
   .icons {

@@ -8,10 +8,14 @@ import TicketAssignVendorAcknowledged from "./assign-ticket-vendor-acknowledge";
 import TicketAssignReslove from "./assign-ticket-reslove"; // Import
 import TicketView from "./view-ticket";
 import TicketClose from "./close-ticket";
-import { FaUserPlus, FaCheckCircle, FaSpinner, FaRegClock, FaRegCheckCircle } from "react-icons/fa"; 
+import {
+  FaUserPlus,
+  FaCheckCircle,
+  FaSpinner,
+  FaRegClock,
+  FaRegCheckCircle,
+} from "react-icons/fa";
 import ViewIcon from "../../assets/View-Icon.png";
-
-
 
 const TicketLeft = ({ filters }) => {
   console.log(filters, "filters data");
@@ -209,7 +213,9 @@ const TicketLeft = ({ filters }) => {
                 <div className="AssignDetails">
                   <div className="Column">
                     <span className="Text">Project</span>
-                    <span className="Text1">{ticket.project.name || "N/A"}</span>
+                    <span className="Text1">
+                      {ticket.project.name || "N/A"}
+                    </span>
                   </div>
                   <div className="Column">
                     <span className="Text">Module</span>
@@ -247,48 +253,53 @@ const TicketLeft = ({ filters }) => {
                   <img src={ViewIcon} alt="View" width="20" height="20" />
                 </button>
                 {location.search.includes("assigned=yes") && (
-                 <div className="btn">
-                 {role === 3 && ticket.ticketsStatus.id === 1 && (
-                   <button
-                     className="btn-assign"
-                     onClick={() => handleAssignClick(ticket)}
-                   >
-                     <FaUserPlus style={{ marginRight: '8px' }} /> Assign
-                   </button>
-                 )}
-                 {role === 4 && ticket.ticketsStatus.id === 2 && (
-                   <button
-                     className="btn-Aknow"
-                     onClick={() => handleAssignVendorAdminEmployeeClick(ticket)}
-                   >
-                     <FaCheckCircle style={{ marginRight: '8px' }} /> Acknowledged
-                   </button>
-                 )}
-                 {role === 5 && ticket.ticketsStatus.id === 3 && (
-                   <button
-                     className="btn-inpro"
-                     onClick={() => handleAssignAcknowledgeClick(ticket)}
-                   >
-                     <FaSpinner style={{ marginRight: '8px' }} spin /> In Progress
-                   </button>
-                 )}
-                 {role === 5 && ticket.ticketsStatus.id === 4 && (
-                   <button
-                     className="btn-resolved"
-                     onClick={() => handleResloveClick(ticket)}
-                   >
-                     <FaRegClock style={{ marginRight: '8px' }} /> Resolved
-                   </button>
-                 )}
-                 {role === 6 && ticket.ticketsStatus.id === 5 && (
-                   <button
-                     className="btn-close"
-                     onClick={() => handleCloseClick(ticket)}
-                   >
-                     <FaRegCheckCircle style={{ marginRight: '8px' }} /> Close
-                   </button>
-                 )}
-               </div>
+                  <div className="btn">
+                    {role === 3 && ticket.ticketsStatus.id === 1 && (
+                      <button
+                        className="btn-assign"
+                        onClick={() => handleAssignClick(ticket)}
+                      >
+                        <FaUserPlus style={{ marginRight: "8px" }} /> Assign
+                      </button>
+                    )}
+                    {role === 4 && ticket.ticketsStatus.id === 2 && (
+                      <button
+                        className="btn-Aknow"
+                        onClick={() =>
+                          handleAssignVendorAdminEmployeeClick(ticket)
+                        }
+                      >
+                        <FaCheckCircle style={{ marginRight: "8px" }} />{" "}
+                        Acknowledged
+                      </button>
+                    )}
+                    {role === 5 && ticket.ticketsStatus.id === 3 && (
+                      <button
+                        className="btn-inpro"
+                        onClick={() => handleAssignAcknowledgeClick(ticket)}
+                      >
+                        <FaSpinner style={{ marginRight: "8px" }} spin /> In
+                        Progress
+                      </button>
+                    )}
+                    {role === 5 && ticket.ticketsStatus.id === 4 && (
+                      <button
+                        className="btn-resolved"
+                        onClick={() => handleResloveClick(ticket)}
+                      >
+                        <FaRegClock style={{ marginRight: "8px" }} /> Resolved
+                      </button>
+                    )}
+                    {role === 6 && ticket.ticketsStatus.id === 5 && (
+                      <button
+                        className="btn-close"
+                        onClick={() => handleCloseClick(ticket)}
+                      >
+                        <FaRegCheckCircle style={{ marginRight: "8px" }} />{" "}
+                        Close
+                      </button>
+                    )}
+                  </div>
                 )}
               </div>
             </div>
@@ -299,20 +310,21 @@ const TicketLeft = ({ filters }) => {
 
         {/* Pagination Controls */}
         <div className="pagination">
-          <button onClick={handlePrevious} disabled={currentPage === 1}>
-            &laquo;
-          </button>
           <span>
             Page {currentPage} of{" "}
             {Math.ceil(ticketClose.length / ticketsPerPage)}
           </span>
-          <button
+          <button className="pagination-btn" onClick={handlePrevious} disabled={currentPage === 1}>
+            <h4 className="pagination-h4">Prev</h4>
+          </button>
+
+          <button className="pagination-btn"
             onClick={handleNext}
             disabled={
               currentPage >= Math.ceil(ticketClose.length / ticketsPerPage)
             }
           >
-            &raquo;
+            <h4 className="pagination-h4">Next</h4>
           </button>
         </div>
       </div>

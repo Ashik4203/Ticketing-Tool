@@ -3,18 +3,21 @@ import { useNavigate } from "react-router-dom";
 import OverView from "../assets/Dashboard-icon.png";
 import Ticket from "../assets/Ticket-icon.png";
 import Report from "../assets/Report-icon.png";
-import Settings from "../assets/settings.png";
+import Addticket from "../assets/Add new ticket.png";
+import Assignticket from "../assets/Assign ticket.png";
 import "../style/sidebar.css";
 
 const getIcon = (iconName) => {
   const icons = {
-    cilArrowLeft: Ticket,
-    cilSettings: Settings,
-    cilReport: Report,
-    cilDashboard: OverView,
+    OverView: OverView,
+    Ticket: Ticket,
+    Report: Report,
+    Addticket: Addticket,
+    Assignticket: Assignticket,
   };
   return icons[iconName] || OverView;
 };
+
 
 const Sidebar = () => {
   const navigate = useNavigate();
@@ -24,45 +27,33 @@ const Sidebar = () => {
     {
       name: "Dashboard",
       route: "/dashboard",
-      icon: "cilDashboard",
+      icon: "OverView",
       slug: "view_dashboard",
     },
-    {
-      name: "Add New User",
-      route: "/users",
-      icon: "cilSettings",
-      slug: "add_user",
-    },
-    { name: "Users", route: "/users", icon: "cilSettings", slug: "view_user" },
+
     {
       name: "Add New Ticket",
       route: "/ticket/createticket",
-      icon: "cilArrowLeft",
+      icon: "Addticket",
       slug: "add_ticket",
     },
     {
       name: "My Tickets",
       route: "/tickets",
-      icon: "cilArrowLeft",
+      icon: "Ticket",
       slug: "view_ticket",
     },
     {
       name: "Assigned Tickets",
       route: "/tickets?assigned=yes",
-      icon: "cilArrowLeft",
+      icon: "Assignticket",
       slug: "view_assigned_ticket",
     },
     {
       name: "Reports",
       route: "/report",
-      icon: "cilReport",
+      icon: "Report",
       slug: "view_report",
-    },
-    {
-      name: "Settings",
-      route: "/settings",
-      icon: "cilSettings",
-      slug: "view_settings",
     },
   ];
 

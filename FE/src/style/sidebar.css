@@ -1,22 +1,24 @@
 /* Sidebar Container */
 .sidebar {
-  width: 250px;
-  height: 100%;
+  width: 20%; /* Changed from 250px */
+  height: 100vh; /* Full screen height */
   background: linear-gradient(#FF6F09, #FFBA89);
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 10px;
+  gap: 1rem;
   border-top-right-radius: 20px;
   border-bottom-right-radius: 20px;
+  position: relative;
+  z-index: 1;
 }
 
 /* Navigation Menu */
 .nav-menu {
-  width: 80%;
+  width: 90%;
   display: flex;
   flex-direction: column;
-  gap: 10px; /* Space between items */
+  gap: 1rem;
 }
 
 /* Navigation Items (Main Modules) */
@@ -24,11 +26,11 @@
   background: none;
   border: none;
   width: 100%;
-  padding: 12px;
+  padding: 0.8rem 1rem;
   display: flex;
   align-items: center;
-  gap: 15px; /* ✅ Increased gap between icon and text */
-  font-size: 14px;
+  gap: 1rem;
+  font-size: 1rem;
   font-family: 'Work Sans', sans-serif;
   color: white;
   cursor: pointer;
@@ -39,31 +41,32 @@
 /* Hover Effect */
 .nav-item:hover {
   background: rgba(255, 255, 255, 0.2);
-  border-radius: 5px;
+  border-radius: 8px;
 }
 
 /* Icon Styling */
 .icon {
-  width: 24px;
-  height: 24px;
-  flex-shrink: 0; /* ✅ Prevents icon from shrinking */
+  width: 1.5rem;
+  height: 1.5rem;
+  flex-shrink: 0;
 }
 
 /* Main Menu Items */
 .main-menu {
-  font-size: 14px;
+  font-size: 1rem;
   font-weight: 500;
-  padding: 10px 15px;
+  padding: 0.7rem 1rem;
+  margin-top: 10%;
 }
 
 /* Submenu Container */
 .submenu {
   list-style-type: none;
-  padding-left: 0px;
-  margin-top: 15px;
+  padding-left: 0;
+  margin-top: 1rem;
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 0.5rem;
 }
 
 /* Submenu Items */
@@ -74,15 +77,15 @@
 .sub-menu-btn {
   background: none;
   border: none;
-  font-size: 14px;
+  font-size: 1rem;
   font-family: 'Work Sans', sans-serif;
   color: white;
-  padding: 8px 10px;
+  padding: 0.6rem 1rem;
   cursor: pointer;
   text-align: left;
   display: flex;
   align-items: center;
-  gap: 15px; /* ✅ Space between submodule icon and text */
+  gap: 1rem;
   transition: background 0.3s ease;
   width: 100%;
 }
@@ -90,12 +93,19 @@
 /* Submenu Hover Effect */
 .sub-menu-btn:hover {
   background: rgba(255, 255, 255, 0.15);
-  border-radius: 5px;
+  border-radius: 6px;
 }
 
-.background-img{
-  width: 250px;
-  height: 100%;
-  background: linear-gradient(to top, #ffffff, #ff6a00);
-  opacity: 0.1;
+/* Background Image */
+.background-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin-top: 120%;
+  width: 100%;
+  height: 60%;
+  object-fit: cover;
+  opacity: 0.08;
+  z-index: 0;
+  pointer-events: none; /* So it doesn’t block clicks */
 }
