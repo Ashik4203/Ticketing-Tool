@@ -39,14 +39,12 @@ const HeaderRight = () => {
 
         {showPopup && (
        <div className="profile-popup" ref={popupRef}>
-       <button className="popup-close" onClick={() => setShowPopup(false)}>×</button>
-     
-       <p className="popup-email">{email}</p>
-       <div className="popup-avatar">
+            <div className="popup-avatar">
          <div className="avatar-circle">{name.charAt(0).toUpperCase()}</div>
-         <p className="greeting">Hi, {name}!</p>
+         
        </div>
        <div className="popup-footer">
+       <p className="greeting">Hi, {name}!</p>
          <button className="popup-btn secondary" onClick={handleLogout}>↪ Log out</button>
        </div>
      </div>
