@@ -76,7 +76,7 @@ exports.getMyTickets = async (req, res) => {
         const userId = req.user.id;
         const key = req.query.key; // Read the key param
         const page = parseInt(req.query.page) || 1;
-        const limit = parseInt(req.query.limit) || 10;
+        const limit = parseInt(req.query.limit) || 500;
         const offset = (page - 1) * limit;
 
         // Conditionally apply "created_by" filter
@@ -176,7 +176,7 @@ exports.getMyAssignedTickets = async (req, res) => {
 
         // Only apply pagination if not exporting
         const page = parseInt(req.query.page) || 1;
-        const limit = parseInt(req.query.limit) || 10;
+        const limit = parseInt(req.query.limit) || 500;
         const offset = (page - 1) * limit;
         const pagination = exportType ? {} : { limit, offset };
 

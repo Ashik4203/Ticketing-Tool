@@ -1,0 +1,13 @@
+/* Desktop Styles for .heading-text */
+.heading-text {
+    width: 100%;
+    color: #2c2c74;
+    font-size: 14px;
+    font-family: 'Work Sans', sans-serif;
+    font-weight: 300;
+}
+.head-text{
+    margin: unset;
+    margin-bottom: 11px;
+
+}

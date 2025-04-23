@@ -287,7 +287,7 @@
   background: #fff;
   padding: 40px 10px 20px 10px;
   box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1); /* Shadow on the left */
-  width: 520px; /* Adjust width as needed */
+  width: 600px; /* Adjust width as needed */
   height: 100vh; /* Full height */
   overflow-y: auto;
   position: relative;

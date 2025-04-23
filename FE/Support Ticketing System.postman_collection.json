@@ -1,0 +1,1049 @@
+{
+	"info": {
+		"_postman_id": "480d47fd-735f-48f2-b4b6-e38a992a6546",
+		"name": "Support Ticketing System",
+		"description": "API Collection for Express.js-based Support Ticketing System",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "7825703"
+	},
+	"item": [
+		{
+			"name": "User Registration",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwidXNlcm5hbWUiOiJzZWx2YW1AdHZzLmluIiwicm9sZSI6MiwiY29tcGFueV9pZCI6MSwiaWF0IjoxNzQ0NDI2MDIwfQ.1ND3ovyWV-V5ecynyBayGQU4GjQnnWnWqIcvg04teEA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"TVS Employee\",\n    \"email\": \"tvs_employee@tvs.in\",\n    \"password\": \"12345678\",\n    \"role\": \"6\",\n    \"project\": \"\",\n    \"vendor\": \"\",\n    \"vendor_admin\": \"\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/auth/register",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"auth",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Company Registration",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"company\": {\n    \"name\": \"TVS Auto Mobile\",\n    \"subscription_plan\": \"professional\",\n    \"subscription_status\": \"trial\",\n    \"trial_ends_at\": \"2025-06-01T00:00:00Z\"\n  },\n  \"admin\": {\n    \"name\": \"Selvam\",\n    \"email\": \"selvam@tvs.in\",\n    \"password\": \"12345678\"\n  }\n}\n"
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/companies/register-with-admin",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"companies",
+						"register-with-admin"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "User Login",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"selvam@tvs.in\",\n    \"password\": \"12345678\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/auth/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Ticket",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\": \"Login Issue\",\n    \"description\": \"Unable to login to the system.\",\n    \"priority\": \"High\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/tickets",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"tickets"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "View All Tickets (Admin)",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3000/api/tickets",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"tickets"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Assign Ticket",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"assignedTo\": 4\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/tickets/1/assign",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"tickets",
+						"1",
+						"assign"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Ticket Status",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"status\": \"Resolved\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/tickets/1/status",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"tickets",
+						"1",
+						"status"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Ticket Status Copy",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"status\": \"Resolved\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/tickets/1/status",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"tickets",
+						"1",
+						"status"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Ticket Status Copy 2",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"status\": \"Resolved\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/tickets/1/status",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"tickets",
+						"1",
+						"status"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Ticket Status Copy 3",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"status\": \"Resolved\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/tickets/1/status",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"tickets",
+						"1",
+						"status"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Ticket Timeline",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3000/api/tickets/1/timeline",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"tickets",
+						"1",
+						"timeline"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Projects",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Website Redesign\",\r\n  \"description\": \"Complete overhaul of company website for better UX/UI.\",\r\n  \"company_id\": 1,\r\n  \"user_id\": 3\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/projects",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"projects"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Projects",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Website Redesign\",\r\n  \"description\": \"Complete overhaul of company website for better UX/UI.\",\r\n  \"company_id\": 1,\r\n  \"user_id\": 3\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/projects",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"projects"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Vendor",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwidXNlcm5hbWUiOiJzZWx2YW1AdHZzLmluIiwicm9sZSI6MiwiY29tcGFueV9pZCI6MSwiaWF0IjoxNzQ0NDI2MDIwfQ.1ND3ovyWV-V5ecynyBayGQU4GjQnnWnWqIcvg04teEA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Vendor ABC\",\r\n  \"contact_person\": \"John Doe\",\r\n  \"email\": \"vendor@example.com\",\r\n  \"phone\": \"9876543210\",\r\n  \"address\": \"123 Tech Park\",\r\n  \"service_type\": \"IT Services\",\r\n  \"status\": \"active\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/vendors",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"vendors"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Vendor",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwidXNlcm5hbWUiOiJzZWx2YW1AdHZzLmluIiwicm9sZSI6MiwiY29tcGFueV9pZCI6MSwiaWF0IjoxNzQ0NDI2MDIwfQ.1ND3ovyWV-V5ecynyBayGQU4GjQnnWnWqIcvg04teEA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Vendor ABC\",\r\n  \"contact_person\": \"John Doe\",\r\n  \"email\": \"vendor@example.com\",\r\n  \"phone\": \"9876543210\",\r\n  \"address\": \"123 Tech Park\",\r\n  \"service_type\": \"IT Services\",\r\n  \"status\": \"active\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/vendors",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"vendors"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Project Vendor",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwidXNlcm5hbWUiOiJzZWx2YW1AdHZzLmluIiwicm9sZSI6MiwiY29tcGFueV9pZCI6MSwiaWF0IjoxNzQ0NDI2MDIwfQ.1ND3ovyWV-V5ecynyBayGQU4GjQnnWnWqIcvg04teEA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"project_id\": 1,\r\n  \"vendor_id\": 1\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/project-vendors",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"project-vendors"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Project Vendor",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwidXNlcm5hbWUiOiJzZWx2YW1AdHZzLmluIiwicm9sZSI6MiwiY29tcGFueV9pZCI6MSwiaWF0IjoxNzQ0NDI2MDIwfQ.1ND3ovyWV-V5ecynyBayGQU4GjQnnWnWqIcvg04teEA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"project_id\": 1,\r\n  \"vendor_id\": 1\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/project-vendors",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"project-vendors"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Ticket",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwidXNlcm5hbWUiOiJzZWx2YW1AdHZzLmluIiwicm9sZSI6MiwiY29tcGFueV9pZCI6MSwiaWF0IjoxNzQ0NDI2MDIwfQ.1ND3ovyWV-V5ecynyBayGQU4GjQnnWnWqIcvg04teEA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"project_id\": 1,\r\n    \"module\": \"Login Module\",\r\n    \"subject\": \"Test\",\r\n    \"category\": \"category\",\r\n    \"source\": \"Call\",\r\n    \"due_date\": \"2025-04-12\",\r\n    \"behalf_of\": \"NOthing\",\r\n    \"problem_description\": \"The login button does not respond when clicked on mobile view.\",\r\n    \"priority\": \"high\",\r\n    \"attachment\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/tickets",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"tickets"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "My Ticket",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwidXNlcm5hbWUiOiJzZWx2YW1AdHZzLmluIiwicm9sZSI6MiwiY29tcGFueV9pZCI6MSwiaWF0IjoxNzQ0NDI2MDIwfQ.1ND3ovyWV-V5ecynyBayGQU4GjQnnWnWqIcvg04teEA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/tickets",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"tickets"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "All Ticket",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwidXNlcm5hbWUiOiJzZWx2YW1AdHZzLmluIiwicm9sZSI6MiwiY29tcGFueV9pZCI6MSwiaWF0IjoxNzQ0NDI2MDIwfQ.1ND3ovyWV-V5ecynyBayGQU4GjQnnWnWqIcvg04teEA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"project_id\": 3,\r\n    \"module\": \"Login Module\",\r\n    \"subject\": \"Test\",\r\n    \"category\": \"category\",\r\n    \"source\": \"Call\",\r\n    \"due_date\": \"2025-04-12\",\r\n    \"behalf_of\": \"NOthing\",\r\n    \"problem_description\": \"The login button does not respond when clicked on mobile view.\",\r\n    \"priority\": \"high\",\r\n    \"attachment\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/tickets?key=all",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"tickets"
+					],
+					"query": [
+						{
+							"key": "key",
+							"value": "all"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "All Ticket Copy",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwidXNlcm5hbWUiOiJzZWx2YW1AdHZzLmluIiwicm9sZSI6MiwiY29tcGFueV9pZCI6MSwiaWF0IjoxNzQ0NDI2MDIwfQ.1ND3ovyWV-V5ecynyBayGQU4GjQnnWnWqIcvg04teEA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"project_id\": 3,\r\n    \"module\": \"Login Module\",\r\n    \"subject\": \"Test\",\r\n    \"category\": \"category\",\r\n    \"source\": \"Call\",\r\n    \"due_date\": \"2025-04-12\",\r\n    \"behalf_of\": \"NOthing\",\r\n    \"problem_description\": \"The login button does not respond when clicked on mobile view.\",\r\n    \"priority\": \"high\",\r\n    \"attachment\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/tickets/ticket/status",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"tickets",
+						"ticket",
+						"status"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Assigned Tickets",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwidXNlcm5hbWUiOiJzZWx2YW1AdHZzLmluIiwicm9sZSI6MiwiY29tcGFueV9pZCI6MSwiaWF0IjoxNzQ0NDI2MDIwfQ.1ND3ovyWV-V5ecynyBayGQU4GjQnnWnWqIcvg04teEA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"project_id\": 3,\r\n    \"module\": \"Login Module\",\r\n    \"subject\": \"Test\",\r\n    \"category\": \"category\",\r\n    \"source\": \"Call\",\r\n    \"due_date\": \"2025-04-12\",\r\n    \"behalf_of\": \"NOthing\",\r\n    \"problem_description\": \"The login button does not respond when clicked on mobile view.\",\r\n    \"priority\": \"high\",\r\n    \"attachment\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/tickets/assigned/myself",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"tickets",
+						"assigned",
+						"myself"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Ticket By ID",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwidXNlcm5hbWUiOiJzZWx2YW1AdHZzLmluIiwicm9sZSI6MiwiY29tcGFueV9pZCI6MSwiaWF0IjoxNzQ0NDI2MDIwfQ.1ND3ovyWV-V5ecynyBayGQU4GjQnnWnWqIcvg04teEA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"project_id\": 3,\r\n    \"module\": \"Login Module\",\r\n    \"subject\": \"Test\",\r\n    \"category\": \"category\",\r\n    \"source\": \"Call\",\r\n    \"due_date\": \"2025-04-12\",\r\n    \"behalf_of\": \"NOthing\",\r\n    \"problem_description\": \"The login button does not respond when clicked on mobile view.\",\r\n    \"priority\": \"high\",\r\n    \"attachment\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/tickets/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"tickets",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Vendor Admin list",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwidXNlcm5hbWUiOiJzZWx2YW1AdHZzLmluIiwicm9sZSI6MiwiY29tcGFueV9pZCI6MSwiaWF0IjoxNzQ0NDI2MDIwfQ.1ND3ovyWV-V5ecynyBayGQU4GjQnnWnWqIcvg04teEA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/tickets/vendor-admin",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"tickets",
+						"vendor-admin"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Vendor Admin list Copy",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwidXNlcm5hbWUiOiJzZWx2YW1AdHZzLmluIiwicm9sZSI6MiwiY29tcGFueV9pZCI6MSwiaWF0IjoxNzQ0NDI2MDIwfQ.1ND3ovyWV-V5ecynyBayGQU4GjQnnWnWqIcvg04teEA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/tickets/vendor-admin",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"tickets",
+						"vendor-admin"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Assgined to Vendor Admin",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwidXNlcm5hbWUiOiJzZWx2YW1AdHZzLmluIiwicm9sZSI6MiwiY29tcGFueV9pZCI6MSwiaWF0IjoxNzQ0NDI2MDIwfQ.1ND3ovyWV-V5ecynyBayGQU4GjQnnWnWqIcvg04teEA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"ticketId\":\"1\",\r\n    \"vendorAdminId\":\"13\",\r\n    \"statusId\":2\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/tickets/assign-vendor-admin",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"tickets",
+						"assign-vendor-admin"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Vendor Employee",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwidXNlcm5hbWUiOiJzZWx2YW1AdHZzLmluIiwicm9sZSI6MiwiY29tcGFueV9pZCI6MSwiaWF0IjoxNzQ0NDI2MDIwfQ.1ND3ovyWV-V5ecynyBayGQU4GjQnnWnWqIcvg04teEA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"ticketId\":\"1\",\r\n    \"vendorAdminId\":\"13\",\r\n    \"statusId\":2\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/tickets/vendor-employee",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"tickets",
+						"vendor-employee"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "rbac",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwidXNlcm5hbWUiOiJzZWx2YW1AdHZzLmluIiwicm9sZSI6MiwiY29tcGFueV9pZCI6MSwiaWF0IjoxNzQ0NDI2MDIwfQ.1ND3ovyWV-V5ecynyBayGQU4GjQnnWnWqIcvg04teEA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"ticketId\":\"1\",\r\n    \"vendorAdminId\":\"13\",\r\n    \"statusId\":2\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/auth/rbac",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"auth",
+						"rbac"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "",
+				"type": "string"
+			}
+		]
+	}
+}

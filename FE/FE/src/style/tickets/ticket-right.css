@@ -1,0 +1,34 @@
+
+.DetailBox {
+  display: flex;
+  justify-content: center;  /* Horizontally center */
+  align-items: center;      /* Vertically center */
+  width: 100%;              /* Ensure it takes full width of the parent */
+  height: 100%;             /* Ensure it takes full height of the parent */
+  text-align: center;       /* Centers text inside the box */
+}
+
+.Deatil-1{
+  width: fit-content;
+  display: flex;
+  flex-direction: column;
+}
+
+.Detail{
+  display: flex;
+  flex-direction: row;
+  gap: 50px;
+}
+.text{
+  width: 100px;
+  text-align: left;
+  font-family: 'Work Sans', sans-serif;
+  font-size: small;
+}
+
+.colon-1,.colon-2,.colon-3,.colon-4,.colon-5{
+  height: 4px;
+  /* padding-left: 10px; */
+  font-size: 15px;
+  font-family: 'Work Sans', sans-serif;
+}

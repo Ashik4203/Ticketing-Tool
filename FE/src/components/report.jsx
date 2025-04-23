@@ -8,127 +8,84 @@ import { saveAs } from "file-saver";
 import excleIcon from "../assets/excel.png";
 import "../style/report.css";
 
-export const Report = () => {
-  // Initialize as empty array instead of an empty string
+const Report = () => {
   const [ticketDetails, setTicketDetails] = useState([]);
-  const [dateRange, setDateRange] = useState([null, null]);
-  const [startDate, endDate] = dateRange;
-  const [isOpen, setIsOpen] = useState(false);
+  const [filteredData, setFilteredData] = useState([]);
   const [selectedProject, setSelectedProject] = useState("");
   const [selectedStatus, setSelectedStatus] = useState("");
-  const [filteredData, setFilteredData] = useState([]);
-
-  // Fetch ticket details from the API
-  useEffect(() => {
-    const fetchTicketDetails = async () => {
-      try {
-        const response = await axios.get(
-          "https://mocki.io/v1/fb4d2454-e975-4c28-9224-c3fbac12ae52"
-        );
-        // Make sure response.data is an array before setting it
-        if (Array.isArray(response.data)) {
-          setTicketDetails(response.data); // Update state with fetched data
-        } else {
-          console.error("Fetched data is not an array:", response.data);
-        }
-      } catch (error) {
-        console.error("Error fetching ticket details:", error);
-      }
-    };
-
-    fetchTicketDetails();
-  }, []);
-
-  // Pagination State
+  const [dateRange, setDateRange] = useState([null, null]);
+  const [isOpen, setIsOpen] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 8;
 
-  // Handle Filtering
+  const [startDate, endDate] = dateRange;
+
+  // Fetch data
+  useEffect(() => {
+    const fetchTickets = async () => {
+      try {
+        const res = await axios.get("https://mocki.io/v1/fb4d2454-e975-4c28-9224-c3fbac12ae52");
+        if (Array.isArray(res.data)) {
+          const unique = [...new Map(res.data.map(item => [item.id, item])).values()];
+          setTicketDetails(unique);
+          setFilteredData(unique);
+        } else {
+          console.error("Data is not an array:", res.data);
+        }
+      } catch (err) {
+        console.error("Error fetching ticket details:", err);
+      }
+    };
+    fetchTickets();
+  }, []);
+
+  // Filter logic
   const handleFilter = () => {
-    let filtered = ticketDetails; // Changed from fetchTicketDetails to ticketDetails
+    let result = [...ticketDetails];
 
     if (selectedProject) {
-      filtered = filtered.filter((row) => row.module === selectedProject);
+      result = result.filter(row => row.module === selectedProject);
     }
-
     if (selectedStatus) {
-      filtered = filtered.filter((row) => row.status === selectedStatus);
+      result = result.filter(row => row.status === selectedStatus);
     }
-
     if (startDate && endDate) {
-      filtered = filtered.filter((row) => {
+      result = result.filter(row => {
         const rowDate = new Date(row.date.split("/").reverse().join("-"));
         return rowDate >= startDate && rowDate <= endDate;
       });
     }
 
-    setFilteredData(filtered);
-    setCurrentPage(1); // Reset to first page when filtering
+    setFilteredData(result);
+    setCurrentPage(1);
   };
 
-  useEffect(() => {
-    const uniqueData = [
-      ...new Map(ticketDetails.map((item) => [item.id, item])).values(),
-    ];
-    setFilteredData(uniqueData);
-  }, [ticketDetails]); // Added ticketDetails as dependency
-
-  // Pagination Logic
-  const totalPages = Math.ceil(filteredData.length / itemsPerPage);
-  const indexOfLastItem = currentPage * itemsPerPage;
-  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentData = filteredData.slice(indexOfFirstItem, indexOfLastItem);
-
-  // Handle Page Change
-  const handlePageChange = (pageNumber) => {
-    setCurrentPage(pageNumber);
-  };
-
-  // Clear filters
   const handleClear = () => {
     setSelectedProject("");
     setSelectedStatus("");
     setDateRange([null, null]);
-    setFilteredData(ticketDetails); // Reset filtered data
+    setFilteredData(ticketDetails);
   };
 
   const exportToExcel = () => {
-    //define table header
     const headers = [
-      [
-        "Sl No",
-        "Date",
-        "Ticket Number",
-        "Project Module",
-        "Ticket Created By",
-        "Ticket Closed By",
-        "Status",
-      ],
+      ["Sl No", "Date", "Ticket Number", "Project Module", "Ticket Created By", "Ticket Closed By", "Status"]
     ];
-    const data = filteredData.map((row, index) => [
-      index + 1,
-      row.date,
-      row.ticket,
-      row.module,
-      row.createdBy,
-      row.closedBy,
-      row.status,
+    const rows = filteredData.map((row, index) => [
+      index + 1, row.date, row.ticket, row.module, row.createdBy, row.closedBy, row.status
     ]);
-    //combine header and data
-    const worksheet = XLSX.utils.aoa_to_sheet([...headers, ...data]);
-    //create a workbook and append the worksheet
+
+    const worksheet = XLSX.utils.aoa_to_sheet([...headers, ...rows]);
     const workbook = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(workbook, worksheet, "Report");
-    //Generate the excel file and trigger the download
-    const excelBuffer = XLSX.write(workbook, {
-      bookType: "xlsx",
-      type: "array",
-    });
-    const dataBlob = new Blob([excelBuffer], {
-      type: "application/octet-stream",
-    });
-    saveAs(dataBlob, "Report.xlsx");
+    const excelBuffer = XLSX.write(workbook, { bookType: "xlsx", type: "array" });
+    const blob = new Blob([excelBuffer], { type: "application/octet-stream" });
+    saveAs(blob, "Report.xlsx");
   };
+
+  // Pagination logic
+  const totalPages = Math.ceil(filteredData.length / itemsPerPage);
+  const currentData = filteredData.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
 
   return (
     <div className="report">
@@ -136,10 +93,7 @@ export const Report = () => {
 
       {/* Filters */}
       <div className="report-filters">
-        <select
-          className="report-dropdown"
-          onChange={(e) => setSelectedProject(e.target.value)}
-        >
+        <select className="report-dropdown" value={selectedProject} onChange={(e) => setSelectedProject(e.target.value)}>
           <option value="">Select Project</option>
           <option value="Customer App">Customer App</option>
           <option value="Focuz ERP">Focuz ERP</option>
@@ -150,26 +104,20 @@ export const Report = () => {
 
         <div className="datepicker-container">
           <DatePicker
-            selectsRange={true}
+            selectsRange
             startDate={startDate}
             endDate={endDate}
             onChange={(update) => setDateRange(update)}
             className="report-datepicker"
             placeholderText="Select Date Range"
-            onClickOutside={() => setIsOpen(false)}
             open={isOpen}
+            onClickOutside={() => setIsOpen(false)}
             onClick={() => setIsOpen(!isOpen)}
           />
-          <FaCalendarAlt
-            className="calendar-icon"
-            onClick={() => setIsOpen(!isOpen)}
-          />
+          <FaCalendarAlt className="calendar-icon" onClick={() => setIsOpen(!isOpen)} />
         </div>
 
-        <select
-          className="report-dropdown"
-          onChange={(e) => setSelectedStatus(e.target.value)}
-        >
+        <select className="report-dropdown" value={selectedStatus} onChange={(e) => setSelectedStatus(e.target.value)}>
           <option value="">Status</option>
           <option value="Open">Open</option>
           <option value="In Progress">In Progress</option>
@@ -178,12 +126,8 @@ export const Report = () => {
           <option value="Closed">Closed</option>
         </select>
 
-        <button className="report-button" onClick={handleFilter}>
-          <h4 className="button-name">Submit</h4>
-        </button>
-        <button className="clear-button" onClick={handleClear}>
-          <h4 className="button-name">Clear</h4>
-        </button>
+        <button className="report-button" onClick={handleFilter}><h4 className="button-name">Submit</h4></button>
+        <button className="clear-button" onClick={handleClear}><h4 className="button-name">Clear</h4></button>
         <button className="export-button" onClick={exportToExcel}>
           <img className="export-excel" src={excleIcon} alt="excel" />
           <h4 className="export-name">Export</h4>
@@ -208,7 +152,7 @@ export const Report = () => {
             {currentData.length > 0 ? (
               currentData.map((row, index) => (
                 <tr key={row.id}>
-                  <td>{indexOfFirstItem + index + 1}</td>
+                  <td>{(currentPage - 1) * itemsPerPage + index + 1}</td>
                   <td>{row.date}</td>
                   <td>{row.ticket}</td>
                   <td>{row.module}</td>
@@ -219,34 +163,22 @@ export const Report = () => {
               ))
             ) : (
               <tr>
-                <td colSpan="8" className="no-data">
-                  No data found
-                </td>
+                <td colSpan="7" className="no-data">No data found</td>
               </tr>
             )}
           </tbody>
         </table>
       </div>
 
-      {/* Pagination Controls */}
+      {/* Pagination */}
       <div className="pagination-report">
-        <span>
-          Page {currentPage} of {totalPages}
-        </span>
-        <button
-          onClick={() => handlePageChange(currentPage - 1)}
-          disabled={currentPage === 1}
-        >
-          {" "}
+        <span>Page {currentPage} of {totalPages}</span>
+        <button onClick={() => setCurrentPage(prev => prev - 1)} disabled={currentPage === 1}>
           <h4 className="pagination-h4">Prev</h4>
         </button>
-
-        <button
-          onClick={() => handlePageChange(currentPage + 1)}
-          disabled={currentPage >= totalPages}
-        >
-            <h4 className="pagination-h4">Next</h4>
-            </button>
+        <button onClick={() => setCurrentPage(prev => prev + 1)} disabled={currentPage === totalPages}>
+          <h4 className="pagination-h4">Next</h4>
+        </button>
       </div>
     </div>
   );
