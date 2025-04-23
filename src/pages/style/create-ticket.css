@@ -1,0 +1,22 @@
+/* .main-container{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+} */
+body{
+    height: 100%;
+    width: 100%;
+}
+.child-container{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    gap: 10px;
+}
+
+.container{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
