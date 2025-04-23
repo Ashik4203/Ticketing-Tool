@@ -1,0 +1,165 @@
+.dashboard {
+    display: flex;
+    flex-direction: column;
+    padding: 0px 0px 0px 15px;
+    gap: 70px;
+  }
+  .heading {
+    color: #2c2c74;
+    margin: unset;
+  }
+  .filters {
+    display: flex;
+    gap: 30px;
+  }
+  
+  .dropdown,
+  .date-picker {
+    padding: 5px;
+    border: 1px solid #ebebeb;
+    border-radius: 5px;
+    width: 20%;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  } 
+
+  /* On hover or focus */
+.dropdown:hover, .dropdown:focus,.date-picker:hover,.date-picker:focus {
+  border-color: #a7a7a7;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  outline: none;
+}
+
+
+/* Optional - adding a label above the dropdown and date picker */
+.filters label {
+  font-weight: bold;
+  margin-bottom: 8px;
+  display: inline-block;
+}
+  
+  .cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    width: 90%;
+    height: 25%;
+    justify-content: center;
+    margin-left: 4%;
+  }
+  
+  .card {
+    flex: 1;
+    border-radius: 2px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    background-color: #ffffff;
+    /* box-shadow: 0 1px 2px 0 hsl(240deg 3.7% 73.84%), 0 0px 0px 0 #c8c9cd; */
+  }
+  
+  .total-tickets {
+    color: #464646;
+    border:1px solid #49c917;
+
+  }
+  
+  .icon-container1 {
+    width: 65px;
+    height: 65px;
+    background-color: rgb(255, 255, 255);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 10%;
+  }
+  .icon-container2 {
+    width: 65px;
+    height: 65px;
+    background-color: rgb(255, 255, 255);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 10%;
+  }
+  .icon-container3 {
+    width: 65px;
+    height: 65px;
+    background-color: rgb(255, 255, 255);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 10%;
+  }
+  .first-icon {
+    width: 25px;
+    height: 25px;
+  }
+  
+  .ticket-name {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    color: #333;
+  }
+  
+  .ticket-name h4 {
+    font-size: 16px;
+    font-weight: 600;
+    line-height: normal;
+    margin-bottom: 15px;
+    color: #8b8b8b;
+    font-family: 'Work Sans', sans-serif;
+  }
+  
+  .ticket-name h2 {
+    font-size: 34px;
+    margin: 0;
+    color: #2c2c74;
+    
+  }
+  
+  .open-tickets {
+    background-color: #ffffff;
+    color: black;
+    border:1px solid #33c7fd;
+
+  }
+  
+  .closed-tickets {
+    background-color: #ffffff;
+    color: black;
+    border:1px solid #ff5656;
+
+  }
+  
+  .charts {
+      display: flex;
+      gap: 30px; /* Increases spacing between charts */
+      justify-content: space-between; /* Distributes charts evenly */
+      width: 94%;
+      min-height: 50%;
+    }
+    
+    .chart-weekly,.chart-monthly {
+      flex: 1;
+      border-radius: 15px; /* Rounded corners */
+      background-color: #fff; /* White background */
+      text-align: center;
+    }
+    
+    .chart-weekly h3 ,.chart-monthly h3 {
+      font-size: 16px;
+      font-weight: bold;
+      margin-bottom: 30px;
+      color: #333;
+      text-align: left;
+    }
+    

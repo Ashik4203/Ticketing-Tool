@@ -1,0 +1,73 @@
+.CloseTicket-Container{
+  width: 99%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  border-radius: 1px;
+  font-family: 'Work Sans', sans-serif;
+  font-size: small;
+  padding: 0px 15px;
+  padding-bottom: 10px;
+  box-sizing: border-box;
+  box-shadow: 0 1px 2px 0 hsl(240, 1%, 88%), 0 0px 0px 0 #515255;
+  background: #ffffff;
+  overflow-y: auto;
+  overflow-x: hidden;
+  max-height: 90vh;
+  scrollbar-width: auto;
+  scrollbar-color: #3754A5 #f1f1f1;
+  }
+  
+  /* Ticket Section Styles */
+.ticket-section {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Ticket Field Styles */
+.ticket-field {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+}
+.close-solution{
+  display: flex;
+  flex-direction: row;
+  gap:10px;
+}
+
+.ticket-field-value {
+  margin-left: 0px; /* Push value to the right */
+}
+
+/* Ticket Actions Styles */
+.ticket-actions {
+  display: flex;
+  flex-direction: row;
+  gap: 60px;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.Close-container{
+  text-align: center;
+  margin-left: 28pxx;
+  margin-top: 10px;
+}
+.Close button{
+  padding: 10px 15px;
+  background-color: #20409A;
+  color: white;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+}
+
+.description{
+  margin-top: 10px;
+  padding-bottom: 40px;
+  text-align: left;
+  width: 100%;
+}
+    

@@ -1,5 +1,4 @@
 {
-<<<<<<< HEAD
   "name": "frontend",
   "version": "0.1.0",
   "private": true,
@@ -50,14 +49,5 @@
     "stream-http": "^3.2.0",
     "url": "^0.11.4",
     "util": "^0.12.5"
-=======
-  "dependencies": {
-    "animate.css": "^4.1.1",
-    "lucide-react": "^0.501.0",
-    "react-icons": "^5.5.0",
-    "react-toastify": "^11.0.5",
-    "sweetalert2": "^11.19.1",
-    "sweetalert2-react-content": "^5.1.0"
->>>>>>> f159e7ee1a62fe7b76321ab086d33d851191e0a7
   }
 }
