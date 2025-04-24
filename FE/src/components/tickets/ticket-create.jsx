@@ -150,7 +150,7 @@ const Create = () => {
               </select>
             </div>
 
-            <div className="form-group-ticket">
+            <div className="form-group-ticket-r">
               <label className="form-label">
                 Module <span className="form-lable-require">*</span>
               </label>
@@ -170,8 +170,6 @@ const Create = () => {
               </select>
             </div>
           </div>
-
-   
 
           {/* Source and Due Date Section */}
           <div className="row">
@@ -195,11 +193,12 @@ const Create = () => {
               </select>
             </div>
 
-            <div className="form-group-ticket datepicker-wrapper">
+            <div className="form-group-ticket-r">
               <label className="form-label">
                 Due Date <span className="form-lable-require">*</span>
               </label>
-              <div className="datepicker">
+
+              <div className="form-date-picker-wrapper">
                 <DatePicker
                   selected={formValues.due_date}
                   onChange={handleDateChange}
@@ -230,7 +229,7 @@ const Create = () => {
               />
             </div>
 
-            <div className="form-group-ticket">
+            <div className="form-group-ticket-r">
               <label className="form-label">Attachment</label>
               <input
                 type="file"
@@ -263,7 +262,7 @@ const Create = () => {
               </select>
             </div>
 
-            <div className="form-group-ticket">
+            <div className="form-group-ticket-r">
               <label className="form-label">
                 Priority Status <span className="form-lable-require">*</span>
               </label>
@@ -283,8 +282,8 @@ const Create = () => {
               </select>
             </div>
           </div>
-                 {/* Subject and Problem Description Section */}
-                 <div className="row">
+          {/* Subject and Problem Description Section */}
+          <div className="row">
             <div className="form-group-ticket">
               <label className="form-label">
                 Subject <span className="form-lable-require">*</span>
@@ -298,7 +297,7 @@ const Create = () => {
               ></textarea>
             </div>
 
-            <div className="form-group-ticket">
+            <div className="form-group-ticket-r">
               <label className="form-label">Problem Description</label>
               <textarea
                 name="problem_description"

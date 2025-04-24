@@ -1,5 +1,6 @@
 .report-heading {
   color: #2c2c74;
+  margin: 0px 0px 10px 0px;
 }
 .report-filters {
   display: flex;
