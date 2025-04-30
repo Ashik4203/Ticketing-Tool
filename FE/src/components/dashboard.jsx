@@ -13,12 +13,14 @@ import {
 } from "recharts";
 import badgeImg from "../assets/fi-rs-badge.png";
 import bookImg from "../assets/fi-rs-book.png";
-import diplomaImg from "../assets/total-tickets.png";
+import Assign from "../assets/fi-rr-comment-user.png";
+import diplomaImg from "../assets/fi-rs-diploma.png";
 import { apiService } from "../services/apiService"; // API service
 
 const Dashboard = () => {
   const [totalTickets, setTotalTickets] = useState(0);
   const [openTickets, setOpenTickets] = useState(0);
+  const [assignedTickets, setAssignedTickets] = useState(0);
   const [closedTickets, setClosedTickets] = useState(0);
   const [weeklyData, setWeeklyData] = useState([]);
   const [monthlyData, setMonthlyData] = useState([]);
@@ -27,23 +29,39 @@ const Dashboard = () => {
     const fetchData = async () => {
       try {
         // Fetch total tickets
-        const totalTicketsResponse = await apiService.get("api/tickets/ticket/dashboard-total");
+        const totalTicketsResponse = await apiService.get(
+          "api/tickets/ticket/dashboard-total"
+        );
         setTotalTickets(totalTicketsResponse.totalTickets);
 
-         // Fetch open tickets count
-         const openTicketsResponse = await apiService.get("api/tickets/ticket/dashboard-open");
-         setOpenTickets(openTicketsResponse.count);
- 
-         // Fetch closed tickets count
-         const closedTicketsResponse = await apiService.get("api/tickets/ticket/dashboard-closed");
-         setClosedTickets(closedTicketsResponse.count);
+        // Fetch open tickets count
+        const openTicketsResponse = await apiService.get(
+          "api/tickets/ticket/dashboard-open"
+        );
+        setOpenTickets(openTicketsResponse.count);
+
+        // Fetch Assign tickets count
+        const assignedTicketsResponse = await apiService.get(
+          "api/tickets/ticket/dashboard-assign"
+        );
+        setAssignedTickets(assignedTicketsResponse.count);
+
+        // Fetch closed tickets count
+        const closedTicketsResponse = await apiService.get(
+          "api/tickets/ticket/dashboard-closed"
+        );
+        setClosedTickets(closedTicketsResponse.count);
 
         // Fetch weekly ticket data
-        const weeklyResponse = await apiService.get("api/tickets/ticket/dashboard-weekly");
+        const weeklyResponse = await apiService.get(
+          "api/tickets/ticket/dashboard-weekly"
+        );
         setWeeklyData(weeklyResponse);
 
         // Fetch monthly ticket data
-        const monthlyResponse = await apiService.get("api/tickets/ticket/dashboard-monthly");
+        const monthlyResponse = await apiService.get(
+          "api/tickets/ticket/dashboard-monthly"
+        );
         setMonthlyData(monthlyResponse);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -73,6 +91,15 @@ const Dashboard = () => {
           <div className="ticket-name">
             <h4>Open Ticket</h4>
             <h2>{openTickets}</h2>
+          </div>
+        </div>
+        <div className="card Assign-tickets">
+          <div className="icon-container3">
+            <img className="first-icon" src={Assign} alt="Assign Tickets" />
+          </div>
+          <div className="ticket-name">
+            <h4>Assigned Ticket</h4>
+            <h2>{assignedTickets}</h2>
           </div>
         </div>
         <div className="card closed-tickets">

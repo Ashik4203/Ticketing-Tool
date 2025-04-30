@@ -16,41 +16,52 @@ const Report = () => {
   const [dateRange, setDateRange] = useState([null, null]);
   const [isOpen, setIsOpen] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const itemsPerPage = 8;
 
   const [startDate, endDate] = dateRange;
 
-  // Fetch data
+  // Fetch ticket details from API
   useEffect(() => {
-    const fetchTickets = async () => {
+    const fetchTicketDetails = async () => {
       try {
-        const res = await axios.get("https://mocki.io/v1/fb4d2454-e975-4c28-9224-c3fbac12ae52");
-        if (Array.isArray(res.data)) {
-          const unique = [...new Map(res.data.map(item => [item.id, item])).values()];
-          setTicketDetails(unique);
-          setFilteredData(unique);
+        const response = await axios.get(
+          "https://mocki.io/v1/e40288c9-c9cd-438b-a3e0-e4175c2273b0"
+        );
+
+        if (response.data && Array.isArray(response.data)) {
+          setTicketDetails(response.data);
         } else {
-          console.error("Data is not an array:", res.data);
+          setError("No ticket details found.");
         }
-      } catch (err) {
-        console.error("Error fetching ticket details:", err);
+      } catch (error) {
+        console.error("Error fetching ticket details:", error);
+        setError("Failed to load ticket details. Please try again later.");
+      } finally {
+        setLoading(false);
       }
     };
-    fetchTickets();
+
+    fetchTicketDetails();
   }, []);
+
+  // if (loading) {
+  //   return <p>Loading ticket details...</p>;
+  // }
 
   // Filter logic
   const handleFilter = () => {
     let result = [...ticketDetails];
 
     if (selectedProject) {
-      result = result.filter(row => row.module === selectedProject);
+      result = result.filter((row) => row.module === selectedProject);
     }
     if (selectedStatus) {
-      result = result.filter(row => row.status === selectedStatus);
+      result = result.filter((row) => row.status === selectedStatus);
     }
     if (startDate && endDate) {
-      result = result.filter(row => {
+      result = result.filter((row) => {
         const rowDate = new Date(row.date.split("/").reverse().join("-"));
         return rowDate >= startDate && rowDate <= endDate;
       });
@@ -69,23 +80,55 @@ const Report = () => {
 
   const exportToExcel = () => {
     const headers = [
-      ["Sl No", "Date", "Ticket Number", "Project Module", "Ticket Created By", "Ticket Closed By", "Status"]
+      [
+        "Sl No",
+        "Ticket Id",
+        "Module",
+        "Subject",
+        "Category",
+        "Source",
+        "Due date",
+        "Behalf of",
+        "Problem description",
+        "Priority",
+        "Ticket Created By",
+        "Ticket Closed By",
+        "Status",
+      ],
     ];
     const rows = filteredData.map((row, index) => [
-      index + 1, row.date, row.ticket, row.module, row.createdBy, row.closedBy, row.status
+      index + 1,
+      row.Ticket_Id,
+      row.Module,
+      row.Subject,
+      row.Category,
+      row.Source,
+      row.Due_date,
+      row.Behalf_of,
+      row.Problem_description,
+      row.Priority,
+      row.createdBy,
+      row.closedBy,
+      row.status,
     ]);
 
     const worksheet = XLSX.utils.aoa_to_sheet([...headers, ...rows]);
     const workbook = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(workbook, worksheet, "Report");
-    const excelBuffer = XLSX.write(workbook, { bookType: "xlsx", type: "array" });
+    const excelBuffer = XLSX.write(workbook, {
+      bookType: "xlsx",
+      type: "array",
+    });
     const blob = new Blob([excelBuffer], { type: "application/octet-stream" });
     saveAs(blob, "Report.xlsx");
   };
 
   // Pagination logic
-  const totalPages = Math.ceil(filteredData.length / itemsPerPage);
-  const currentData = filteredData.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
+  const totalPages = Math.max(1, Math.ceil(filteredData.length / itemsPerPage));
+  const currentData = filteredData.slice(
+    (currentPage - 1) * itemsPerPage,
+    currentPage * itemsPerPage
+  );
 
   return (
     <div className="report">
@@ -93,7 +136,11 @@ const Report = () => {
 
       {/* Filters */}
       <div className="report-filters">
-        <select className="report-dropdown" value={selectedProject} onChange={(e) => setSelectedProject(e.target.value)}>
+        <select
+          className="report-dropdown"
+          value={selectedProject}
+          onChange={(e) => setSelectedProject(e.target.value)}
+        >
           <option value="">Select Project</option>
           <option value="Customer App">Customer App</option>
           <option value="Focuz ERP">Focuz ERP</option>
@@ -114,10 +161,17 @@ const Report = () => {
             onClickOutside={() => setIsOpen(false)}
             onClick={() => setIsOpen(!isOpen)}
           />
-          <FaCalendarAlt className="calendar-icon" onClick={() => setIsOpen(!isOpen)} />
+          <FaCalendarAlt
+            className="calendar-icon"
+            onClick={() => setIsOpen(!isOpen)}
+          />
         </div>
 
-        <select className="report-dropdown" value={selectedStatus} onChange={(e) => setSelectedStatus(e.target.value)}>
+        <select
+          className="report-dropdown"
+          value={selectedStatus}
+          onChange={(e) => setSelectedStatus(e.target.value)}
+        >
           <option value="">Status</option>
           <option value="Open">Open</option>
           <option value="In Progress">In Progress</option>
@@ -126,8 +180,12 @@ const Report = () => {
           <option value="Closed">Closed</option>
         </select>
 
-        <button className="report-button" onClick={handleFilter}><h4 className="button-name">Submit</h4></button>
-        <button className="clear-button" onClick={handleClear}><h4 className="button-name">Clear</h4></button>
+        <button className="report-button" onClick={handleFilter}>
+          <h4 className="button-name">Submit</h4>
+        </button>
+        <button className="clear-button" onClick={handleClear}>
+          <h4 className="button-name">Clear</h4>
+        </button>
         <button className="export-button" onClick={exportToExcel}>
           <img className="export-excel" src={excleIcon} alt="excel" />
           <h4 className="export-name">Export</h4>
@@ -140,11 +198,17 @@ const Report = () => {
           <thead>
             <tr>
               <th>Sl No</th>
-              <th>Date</th>
-              <th>Ticket Number</th>
-              <th>Project Module</th>
-              <th>Ticket Created By</th>
-              <th>Ticket Closed By</th>
+              <th>Ticket Id</th>
+              <th>Module</th>
+              <th>Subject</th>
+              <th>Category</th>
+              <th>Source</th>
+              <th>Due date</th>
+              <th>Behalf of</th>
+              <th>Problem description</th>
+              <th>Priority</th>
+              <th>Created By</th>
+              <th>Closed By</th>
               <th>Status</th>
             </tr>
           </thead>
@@ -153,9 +217,15 @@ const Report = () => {
               currentData.map((row, index) => (
                 <tr key={row.id}>
                   <td>{(currentPage - 1) * itemsPerPage + index + 1}</td>
-                  <td>{row.date}</td>
-                  <td>{row.ticket}</td>
+                  <td>{row.Ticket_Id}</td>
                   <td>{row.module}</td>
+                  <td>{row.Subject}</td>
+                  <td>{row.Category}</td>
+                  <td>{row.Source}</td>
+                  <td>{row.Due_date}</td>
+                  <td>{row.Behalf_of}</td>
+                  <td>{row.Problem_description}</td>
+                  <td>{row.Priority}</td>
                   <td>{row.createdBy}</td>
                   <td>{row.closedBy}</td>
                   <td>{row.status}</td>
@@ -163,7 +233,9 @@ const Report = () => {
               ))
             ) : (
               <tr>
-                <td colSpan="7" className="no-data">No data found</td>
+                <td colSpan="13" className="no-data">
+                  No data found
+                </td>
               </tr>
             )}
           </tbody>
@@ -172,11 +244,19 @@ const Report = () => {
 
       {/* Pagination */}
       <div className="pagination-report">
-        <span>Page {currentPage} of {totalPages}</span>
-        <button onClick={() => setCurrentPage(prev => prev - 1)} disabled={currentPage === 1}>
+        <span>
+          Page {currentPage} of {totalPages}
+        </span>
+        <button
+          onClick={() => setCurrentPage((prev) => prev - 1)}
+          disabled={currentPage === 1}
+        >
           <h4 className="pagination-h4">Prev</h4>
         </button>
-        <button onClick={() => setCurrentPage(prev => prev + 1)} disabled={currentPage === totalPages}>
+        <button
+          onClick={() => setCurrentPage((prev) => prev + 1)}
+          disabled={currentPage === totalPages}
+        >
           <h4 className="pagination-h4">Next</h4>
         </button>
       </div>

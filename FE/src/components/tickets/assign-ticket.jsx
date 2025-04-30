@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
-import "sweetalert2/dist/sweetalert2.min.css";   // SweetAlert2 styles
+import "sweetalert2/dist/sweetalert2.min.css"; // SweetAlert2 styles
 import { apiService } from "../../services/apiService";
 import "../../style/tickets/assign-ticket.css";
 
@@ -11,7 +11,7 @@ const Toast = Swal.mixin({
   toast: true,
   position: "top-start",
   showConfirmButton: false,
-  timer: 3000,               // auto‑close after 3s
+  timer: 1000, // auto‑close after 3s
   timerProgressBar: true,
   background: "rgba(32, 32, 72, 0.85)",
   color: "#fff",
@@ -38,7 +38,10 @@ const TicketAssign = ({ ticket }) => {
       try {
         const formData = new FormData();
         formData.append("project_id", ticket?.project?.id || "");
-        const res = await apiService.post("/api/tickets/vendor-admin", formData);
+        const res = await apiService.post(
+          "/api/tickets/vendor-admin",
+          formData
+        );
         setAssignees(res.data || []);
       } catch {
         setError("Failed to load vendor admin list.");
@@ -64,7 +67,7 @@ const TicketAssign = ({ ticket }) => {
       );
       if (res.message) {
         Toast.fire({ icon: "success", title: "Vendor Admin assigned!" });
-        setTimeout(() => navigate("/ticket", { replace: true }), 3000);
+        setTimeout(() => navigate("/ticket", { replace: true }), 1000);
       } else {
         Toast.fire({ icon: "error", title: "Could not assign vendor admin." });
       }

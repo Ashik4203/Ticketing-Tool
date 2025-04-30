@@ -37,6 +37,8 @@ router.get('/ticket/dashboard-total',  ticketController.dashboardTotal);
 router.get('/ticket/dashboard-weekly',  ticketController.dashboardWeekly);
 router.get('/ticket/dashboard-monthly',  ticketController.dashboardMonthly);
 router.get('/ticket/dashboard-open',  ticketController.dashboardOpen);
+router.get('/ticket/dashboard-assign',  ticketController.dashboardAssigned);
 router.get('/ticket/dashboard-closed',  ticketController.dashboardClosed);
 
-module.exports = router;
+
+module.exports = router; 

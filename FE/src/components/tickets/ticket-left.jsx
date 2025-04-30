@@ -54,6 +54,7 @@ const TicketLeft = ({ filters }) => {
     const fetchTicketDetails = async () => {
       try {
         let response;
+        console.log("API URL:", `api/tickets?${queryParams.toString()}`);
         if (assigned === "yes") {
           response = await apiService.get(
             `api/tickets/assigned/myself?${queryParams.toString()}`
@@ -63,13 +64,16 @@ const TicketLeft = ({ filters }) => {
             `api/tickets?${queryParams.toString()}`
           );
         }
-        if (response.tickets) {
+
+        console.log("API Response:", response); // Log the entire response for inspection
+
+        if (response && response.tickets) {
           setTickets(response.tickets);
         } else {
           setError("Failed to load data");
         }
       } catch (error) {
-        console.error("Error fetching ticket details:", error);
+        console.error("Error fetching ticket details:", error); // Log the actual error
         setError("Failed to load ticket details. Please try again later.");
       } finally {
         setLoading(false);
@@ -314,11 +318,16 @@ const TicketLeft = ({ filters }) => {
             Page {currentPage} of{" "}
             {Math.ceil(ticketClose.length / ticketsPerPage)}
           </span>
-          <button className="pagination-btn" onClick={handlePrevious} disabled={currentPage === 1}>
+          <button
+            className="pagination-btn"
+            onClick={handlePrevious}
+            disabled={currentPage === 1}
+          >
             <h4 className="pagination-h4">Prev</h4>
           </button>
 
-          <button className="pagination-btn"
+          <button
+            className="pagination-btn"
             onClick={handleNext}
             disabled={
               currentPage >= Math.ceil(ticketClose.length / ticketsPerPage)

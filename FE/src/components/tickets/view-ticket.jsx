@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import "../../style/tickets/view-ticket.css";
+import TicketHistory from "../../components/tickets/ticket-history-tracker";
 
 const TicketRight = ({ ticket }) => {
   const { formId, action } = useParams();
@@ -20,7 +21,6 @@ const TicketRight = ({ ticket }) => {
 
   const getValueOrNA = (value) => value ?? "N/A";
 
-  // Format: "18 Apr 2025 | 03:27:31 PM"
   const formatDateTime = (isoString) => {
     if (!isoString) return "N/A";
     const date = new Date(isoString);
@@ -158,6 +158,9 @@ const TicketRight = ({ ticket }) => {
           : {getValueOrNA(ticketDetails.problem_description)}
         </p>
       </div>
+
+      {/* Ticket History Timeline */}
+      <TicketHistory ticketDetails={ticketDetails} />
     </div>
   );
 };

@@ -680,6 +680,24 @@ exports.dashboardOpen = async (req, res) => {
   }
 };
 
+exports.dashboardAssigned = async (req, res) => { 
+    try {
+      const assignedTickets = await Ticket.count({
+        where: {
+          status_id: {
+            [Op.in]: [2] // Using `IN` condition with sequelize operator for closed tickets
+          }
+        }
+      });
+  
+      res.json({count:assignedTickets});
+  
+    } catch (error) {
+      console.error('Closure error:', error);
+      res.status(500).json({ message: 'Error fetching closed ticket status' });
+    }
+  };
+
 exports.dashboardClosed = async (req, res) => {
   try {
     const closedTickets = await Ticket.count({

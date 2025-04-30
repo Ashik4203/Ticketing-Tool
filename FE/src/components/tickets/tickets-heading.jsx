@@ -3,7 +3,7 @@ import "../../style/tickets/tickets-heading.css"; // Ensure the correct file ext
 import { useParams, useLocation } from "react-router-dom";
 const Heading = () => {
   const location = useLocation();
-  const role = parseInt(localStorage.getItem('role_id'));
+  const role = parseInt(localStorage.getItem("role_id"));
   const queryParams = new URLSearchParams(location.search);
   const assigned = queryParams.get("assigned");
   let headingText = "Ticket List";
@@ -12,13 +12,12 @@ const Heading = () => {
       headingText = "All Assigned Tickets";
     }
     if (role === 3) {
-      headingText = "My Assigned Tickets";
+      headingText = "Assign Tickets";
     } else {
       headingText = "Assigned Tickets";
     }
-
   } else {
-    headingText = "Assigned Tickets";
+    headingText = "My Tickets";
   }
 
   return (

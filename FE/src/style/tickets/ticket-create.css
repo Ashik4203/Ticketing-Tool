@@ -22,14 +22,18 @@
   width: 100%;
 }
 
-
-.ticket-formh2 {
-  margin-bottom: 10px;
-  text-align: left;
-  font-size: 18px;
-  margin-top: 0px;
-  font-family: "Work Sans", sans-serif;
+.ticket-formdiv{
+  width: 100%;
   color: #2c2c74;
+  font-size: 14px;
+  font-family: 'Work Sans', sans-serif;
+  font-weight: 300;
+}
+.ticket-formh2 {
+  margin: unset;
+  margin-bottom: 11px;
+  font-size: 18px;
+  font-weight: 500;
 }
 
 .row {
@@ -126,7 +130,7 @@ input[type="file"] {
 }
 
 .form-date-picker {
-  width: 132%;
+  width: 136%;
   padding: 8px 40px 8px 12px; /* right padding for icon */
   font-family: "Work Sans", sans-serif;
   border: 1px solid #ccc;

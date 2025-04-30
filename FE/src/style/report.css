@@ -1,10 +1,11 @@
 .report-heading {
   color: #2c2c74;
   margin: 0px 0px 10px 0px;
+  font-weight: 500;
 }
 .report-filters {
   display: flex;
-  gap: 20px;
+  gap: 14px;
   margin-bottom: 20px;
   flex-wrap: wrap;
 }
@@ -159,6 +160,7 @@
   margin: 0;
   font-size: 14px;
   margin-right: 20px;
+  color: #193e29;
 }
 .report-table-container {
   width: 100%;
@@ -179,6 +181,7 @@
   /* border: 1px solid #ddd; */
   padding: 12px;
   text-align: center;
+  font-size: 14px;
 }
 
 .report-table th {

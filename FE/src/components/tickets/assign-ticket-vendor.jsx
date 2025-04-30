@@ -11,7 +11,7 @@ const Toast = Swal.mixin({
   toast: true,
   position: "top-start",
   showConfirmButton: false,
-  timer: 3000,
+  timer: 1000,
   timerProgressBar: true,
   background: "rgba(30,30,60,0.95)",
   color: "#fff",
@@ -34,7 +34,9 @@ const TicketAssignVendor = ({ ticket }) => {
   useEffect(() => {
     const fetchAssignees = async () => {
       try {
-        const assigneeResponse = await apiService.post("/api/tickets/vendor-employee");
+        const assigneeResponse = await apiService.post(
+          "/api/tickets/vendor-employee"
+        );
         if (assigneeResponse.data) {
           setAssignees(assigneeResponse.data || []);
         } else {
@@ -65,13 +67,22 @@ const TicketAssignVendor = ({ ticket }) => {
     };
 
     try {
-      const response = await apiService.post("/api/tickets/assign-vendor-employee", payload);
+      const response = await apiService.post(
+        "/api/tickets/assign-vendor-employee",
+        payload
+      );
 
       if (response.message) {
-        Toast.fire({ icon: "success", title: "Vendor Employee assigned successfully!" });
-        setTimeout(() => navigate("/ticket"), 2500);
+        Toast.fire({
+          icon: "success",
+          title: "Vendor Employee assigned successfully!",
+        });
+        setTimeout(() => navigate("/ticket"), 1000);
       } else {
-        Toast.fire({ icon: "error", title: "Error assigning vendor employee." });
+        Toast.fire({
+          icon: "error",
+          title: "Error assigning vendor employee.",
+        });
       }
     } catch (error) {
       console.error("Error assigning vendor employee:", error);

@@ -63,13 +63,15 @@
   .profile-popup {
     position: absolute;
     display: flex;
+    flex-direction: column;
     top: 0px;
-    right: 6px;
+    right: 5px;
     width: 280px;
     background-color: #ffffff;
     color: #615f5f;
-    padding: 16px;
+    padding: 8px 18px;
     z-index: 100;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     font-family: 'Work Sans', sans-serif;
 }
   .popup-email {
@@ -104,19 +106,19 @@
     font-size: 18px;
     font-weight: 600;
     margin: unset;
-  }
+    text-align: center;
+}
   
   .popup-btn {
     width: 100%;
-    max-width: 100px;
-    padding: 6px;
+    padding: 10px;
     margin: 6px 0;
     border: none;
-    border-radius: 8px;
-    font-size: 12px;
+    border-radius: 5px;
+    font-size: 14px;
     cursor: pointer;
     transition: background 0.2s ease;
-}
+  }
   
   .popup-btn.primary {
     background-color: #3b82f6;
@@ -135,8 +137,8 @@
   .popup-footer {
     display: flex;
     flex-direction: column;
-    gap: 6px;
-    padding-left: 30px;
+    justify-content: space-between;
+    gap: 10px;
   }
   .popup-close {
     position: absolute;
@@ -154,4 +156,3 @@
   .popup-close:hover {
     color: #000;
   }
-  

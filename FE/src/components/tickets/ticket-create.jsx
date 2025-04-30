@@ -12,7 +12,7 @@ const Toast = Swal.mixin({
   toast: true,
   position: "top-start",
   showConfirmButton: false,
-  timer: 3000,
+  timer: 1000,
   timerProgressBar: true,
   background: "rgba(30,30,60,0.95)",
   color: "#fff",
@@ -107,7 +107,7 @@ const Create = () => {
           icon: "success",
           title: "Ticket created successfully!",
         });
-        setTimeout(() => navigate("/ticket"), 2500);
+        setTimeout(() => navigate("/ticket"), 1000);
       } else {
         Toast.fire({
           icon: "error",
@@ -126,7 +126,9 @@ const Create = () => {
   return (
     <div className="form-container-create">
       <form className="ticket-form" onSubmit={handleSubmit}>
-        <h2 className="ticket-formh2">Create Ticket</h2>
+        <div className="ticket-formdiv">
+          <h2 className="ticket-formh2">Create Ticket</h2>
+        </div>
         <div className="ticket-cont-Details">
           {/* Project and Module Section */}
           <div className="row">

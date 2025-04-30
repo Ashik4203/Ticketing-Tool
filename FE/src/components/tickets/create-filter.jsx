@@ -171,15 +171,6 @@ const Filter = ({ onSearchChange }) => {
                 <p onClick={handleExportFiltered}>Export Data</p>
               </div>
             </div>
-            {/* <div className="filter-btn-group">
-              <button
-                type="button"
-                className="export-all-button"
-                onClick={handleExportAll}
-              >
-                Export All
-              </button>
-            </div> */}
           </div>
         </div>
       </form>

@@ -11,7 +11,7 @@ const Toast = Swal.mixin({
   toast: true,
   position: "top-start",
   showConfirmButton: false,
-  timer: 3000,
+  timer: 1000,
   timerProgressBar: true,
   background: "rgba(30,30,60,0.95)",
   color: "#fff",
@@ -45,7 +45,7 @@ const TicketAssignReslove = ({ ticket }) => {
           icon: "success",
           title: "Ticket marked as Resolved!",
         });
-        setTimeout(() => navigate("/ticket"), 2500);
+        setTimeout(() => navigate("/ticket"), 1000);
       } else {
         Toast.fire({
           icon: "error",

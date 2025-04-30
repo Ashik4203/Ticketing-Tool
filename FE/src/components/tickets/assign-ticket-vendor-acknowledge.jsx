@@ -11,7 +11,7 @@ const Toast = Swal.mixin({
   toast: true,
   position: "top-start",
   showConfirmButton: false,
-  timer: 3000,
+  timer: 1000,
   timerProgressBar: true,
   background: "rgba(30,30,60,0.95)",
   color: "#fff",
@@ -41,10 +41,16 @@ const TicketAssignVendorAcknowledged = ({ ticket }) => {
       const response = await apiService.post("/api/tickets/resolve", payload);
 
       if (response.message) {
-        Toast.fire({ icon: "success", title: "Status updated to In Progress!" });
-        setTimeout(() => navigate("/ticket"), 2500);
+        Toast.fire({
+          icon: "success",
+          title: "Status updated to In Progress!",
+        });
+        setTimeout(() => navigate("/ticket"), 1000);
       } else {
-        Toast.fire({ icon: "error", title: "Error updating status. Try again." });
+        Toast.fire({
+          icon: "error",
+          title: "Error updating status. Try again.",
+        });
       }
     } catch (error) {
       console.error("Error updating ticket status:", error);

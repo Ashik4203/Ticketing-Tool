@@ -9,5 +9,6 @@
 .head-text{
     margin: unset;
     margin-bottom: 11px;
-
+    font-size: 18px;
+    color: #232354;
 }

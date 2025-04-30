@@ -37,7 +37,7 @@ module.exports = (sequelize, DataTypes) => {
     TicketHistory.associate = (models) => {
         TicketHistory.belongsTo(models.Ticket, { foreignKey: 'ticket_id' });
         TicketHistory.belongsTo(models.User, { foreignKey: 'user_id' });
-    };
+    }; 
 
     return TicketHistory;
 };

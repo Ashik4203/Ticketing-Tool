@@ -105,7 +105,7 @@ function LoginRight() {
             popup: "custom-toast success-toast",
           },
           showConfirmButton: false,
-          timer: 2000,
+          timer: 500,
           timerProgressBar: true,
           didClose: () => {
             navigate("/dashboard", { replace: true });
