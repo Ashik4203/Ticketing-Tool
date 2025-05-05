@@ -15,7 +15,7 @@
 
 /* Styling for the Ticket Details container */
 .ticket-cont-Details {
-  padding: 20px 32px;  /* Padding inside the form */
+  padding: 0px 20px;
   max-width: 1200px;
   margin: 0 auto;  /* Centers content */
   box-sizing: border-box;
@@ -38,9 +38,10 @@
 
 .row {
   display: flex;
-  gap: 85px;
+  gap: 150px;
   margin-bottom: 10px;
   flex-wrap: wrap;
+  width: fit-content;
 }
 
 .form-group {
@@ -53,15 +54,14 @@
   flex: 1;
   display: flex;
   flex-direction: column;
-  min-width: 250px;
-  margin-left: 5%;
+  margin-left: 10%;
 }
 .form-group-ticket-r{
-  flex: 1;
+  flex: 1 1;
   display: flex;
   flex-direction: column;
   min-width: 250px;
-  margin-right: 5%;
+  margin-right: 0%;
 }
 
 .form-label {
@@ -69,7 +69,8 @@
   font-weight: 200;
   margin-bottom: 8px;
   color: #181717;
-  margin-top: 14px;
+  margin-top: 5px;
+  width: 365px;
 }
 .form-lable-require {
   color: rgb(201, 8, 8);
@@ -79,7 +80,7 @@ select {
   font-family: "Work Sans", sans-serif;
   border: 1px solid #ccc;
   border-radius: 6px;
-  width: 350px;
+  width: 365px;
   color: #7f7f7f;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
@@ -89,7 +90,7 @@ input {
   font-family: "Work Sans", sans-serif;
   border: 1px solid #ccc;
   border-radius: 6px;
-  width: 332px;
+  width: 345px;
   color: #7f7f7f;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
@@ -119,18 +120,18 @@ input[type="file"] {
   font-family: "Work Sans", sans-serif;
   border: 1px solid #ccc;
   border-radius: 6px;
-  width: 332px;
+  width: 345px;
   color: #7f7f7f;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 .form-date-picker-wrapper {
   position: relative;
-  width: 72%;
+  width: 115%;
 }
 
 .form-date-picker {
-  width: 136%;
+  width: 140%;
   padding: 8px 40px 8px 12px; /* right padding for icon */
   font-family: "Work Sans", sans-serif;
   border: 1px solid #ccc;
@@ -140,23 +141,34 @@ input[type="file"] {
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
+.form-date-picker--keyboard-selected {
+  background-color: #2c2c74;
+  color: white;
+}
+
 .datepicker-icon {
   position: absolute;
   top: 50%;
-  right: 12px;
   transform: translateY(-50%);
   color: #999;
   cursor: pointer;
   z-index: 1;
 }
 
+.button-groupassign{
+  display: flex;
+  justify-content: flex-end;
+  gap: 15px;
+  align-items: end;
+}
 
 .button-group {
   display: flex;
   justify-content: flex-start;
   gap: 25px;
-  margin-top: 45px;
-  margin-left: 37%;
+  margin-top: 20px;
+  margin-left: 0%;
+  padding-left: 100px;
 }
 
 .submit-btn,
@@ -310,4 +322,3 @@ input[type="file"] {
   width: 180px;
   padding-right: 35px;
 }
-

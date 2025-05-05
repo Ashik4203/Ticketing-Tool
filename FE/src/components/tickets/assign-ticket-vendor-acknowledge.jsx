@@ -62,25 +62,7 @@ const TicketAssignVendorAcknowledged = ({ ticket }) => {
     <div className="form-container">
       <form className="ticket-form" onSubmit={handleSubmit}>
         <h2>Vendor Support Team Status Update</h2>
-
-        <div className="comment-section">
-          <label>Comment:</label>
-          <textarea
-            value={comment}
-            onChange={handleCommentChange}
-            required
-            rows="4"
-          ></textarea>
-        </div>
-
         <div className="button-group">
-          <button
-            type="button"
-            className="cancel-btn"
-            onClick={() => navigate("/ticket")}
-          >
-            Cancel
-          </button>
           <button type="submit" className="submit-btn">
             In Progress
           </button>

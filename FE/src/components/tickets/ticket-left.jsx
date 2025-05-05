@@ -222,14 +222,6 @@ const TicketLeft = ({ filters }) => {
                     </span>
                   </div>
                   <div className="Column">
-                    <span className="Text">Module</span>
-                    <span className="Text1">{ticket.category || "N/A"}</span>
-                  </div>
-                  <div className="Column">
-                    <span className="Text">Source</span>
-                    <span className="Text1">{ticket.source || "N/A"}</span>
-                  </div>
-                  <div className="Column">
                     <span className="Text">Due Date</span>
                     <span className="Text1">{ticket.due_date || "N/A"}</span>
                   </div>
@@ -259,40 +251,16 @@ const TicketLeft = ({ filters }) => {
                 {location.search.includes("assigned=yes") && (
                   <div className="btn">
                     {role === 3 && ticket.ticketsStatus.id === 1 && (
-                      <button
-                        className="btn-assign"
-                        onClick={() => handleAssignClick(ticket)}
-                      >
-                        <FaUserPlus style={{ marginRight: "8px" }} /> Assign
-                      </button>
+                      <TicketAssign ticket={ticket} />
                     )}
                     {role === 4 && ticket.ticketsStatus.id === 2 && (
-                      <button
-                        className="btn-Aknow"
-                        onClick={() =>
-                          handleAssignVendorAdminEmployeeClick(ticket)
-                        }
-                      >
-                        <FaCheckCircle style={{ marginRight: "8px" }} />{" "}
-                        Acknowledged
-                      </button>
+                      <TicketAssignVendor ticket={ticket} />
                     )}
                     {role === 5 && ticket.ticketsStatus.id === 3 && (
-                      <button
-                        className="btn-inpro"
-                        onClick={() => handleAssignAcknowledgeClick(ticket)}
-                      >
-                        <FaSpinner style={{ marginRight: "8px" }} spin /> In
-                        Progress
-                      </button>
+                      <TicketAssignVendorAcknowledged ticket={ticket} />
                     )}
                     {role === 5 && ticket.ticketsStatus.id === 4 && (
-                      <button
-                        className="btn-resolved"
-                        onClick={() => handleResloveClick(ticket)}
-                      >
-                        <FaRegClock style={{ marginRight: "8px" }} /> Resolved
-                      </button>
+                      <TicketAssignReslove ticket={ticket} />
                     )}
                     {role === 6 && ticket.ticketsStatus.id === 5 && (
                       <button

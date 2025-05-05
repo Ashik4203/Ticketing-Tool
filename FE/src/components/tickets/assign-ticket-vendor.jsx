@@ -26,6 +26,9 @@ const TicketAssignVendor = ({ ticket }) => {
   const [assignees, setAssignees] = useState([]);
   const [selectedAssignee, setSelectedAssignee] = useState("");
   const [comment, setComment] = useState("");
+  const [selectedPriority, setSelectedPriority] = useState(
+    ticket.priority || ""
+  );
   const [projectId, setProjectId] = useState(ticket?.project?.id || "");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -64,6 +67,7 @@ const TicketAssignVendor = ({ ticket }) => {
       vendorEmployeeId: selectedAssignee,
       statusId: 3,
       comment,
+      priority: selectedPriority,
     };
 
     try {
@@ -97,12 +101,27 @@ const TicketAssignVendor = ({ ticket }) => {
       ) : error ? (
         <p className="error">{error}</p>
       ) : (
-        <form className="ticket-form" onSubmit={handleSubmit}>
-          <h2>Assign Vendor Employee</h2>
-
+        <form className="ticket-form-t" onSubmit={handleSubmit}>
+          <div className="assign-section">
+            <label>Priority:</label>
+            <select
+              className="assign-select"
+              value={selectedPriority}
+              onChange={(e) => setSelectedPriority(e.target.value)}
+              required
+            >
+              <option value="">Select Priority</option>
+              {["Low", "Medium", "High", "Critical"].map((priority) => (
+                <option key={priority} value={priority}>
+                  {priority}
+                </option>
+              ))}
+            </select>
+          </div>
           <div className="assign-section">
             <label>Assign to Vendor Employee:</label>
             <select
+              className="assign-select"
               value={selectedAssignee}
               onChange={handleAssigneeChange}
               required
@@ -115,25 +134,7 @@ const TicketAssignVendor = ({ ticket }) => {
               ))}
             </select>
           </div>
-
-          <div className="comment-section">
-            <label>Comment:</label>
-            <textarea
-              value={comment}
-              onChange={handleCommentChange}
-              required
-              rows="4"
-            ></textarea>
-          </div>
-
-          <div className="button-group">
-            <button
-              type="button"
-              className="cancel-btn"
-              onClick={() => navigate("/ticket")}
-            >
-              Cancel
-            </button>
+          <div className="button-groupassign">
             <button type="submit" className="submit-btn">
               Acknowledged
             </button>

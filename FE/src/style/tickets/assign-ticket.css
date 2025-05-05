@@ -1,16 +1,18 @@
 .form-container {
-  max-width: 100%;
   color: #333;
   border-radius: 1px;
   font-family: 'Work Sans', sans-serif;
   box-sizing: border-box;
-  background: #ffffff;
+  margin-top: -58px;
+  margin-left: 20px;
 }
 
-.ticket-form {
+.ticket-form-t {
   display: flex;
-  flex-direction: column;
-  gap: 5px;
+  flex-direction: row;
+  width: 507px;
+  gap: 10px;
+  margin-top: 25px;
 }
 
 .form-group {
@@ -68,10 +70,11 @@
   min-width: 215px;
 }
 
-.button-group {
+.button-groupassign {
   display: flex;
   justify-content: flex-end;
   gap: 15px;
+  align-items: end;
 }
 
 .cancel-btn,
@@ -95,7 +98,7 @@
   background: #f86700;
 }
 
-.submit-btn {
+.submit-assign-btn {
   background: #20409A;
   color: white;
 }
@@ -128,7 +131,6 @@ input[type="file"]:hover {
 } 
 
 .assign-section {
-  margin: 20px 0;
   display: flex;
   flex-direction: column;
   gap: 5px;
@@ -142,7 +144,8 @@ input[type="file"]:hover {
   color: #181717;
 }
 
-.assign-section select {
+.assign-select {
+  width: 185px;
   padding: 8px;
   border-radius: 6px;
   border: 1px solid #ddd;
@@ -151,7 +154,7 @@ input[type="file"]:hover {
   transition: border-color 0.3s ease;
 }
 
-.assign-section select:focus {
+.assign-select:focus {
   border-color: #20409A;
   outline: none;
 }

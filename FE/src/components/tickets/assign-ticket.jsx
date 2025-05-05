@@ -11,7 +11,7 @@ const Toast = Swal.mixin({
   toast: true,
   position: "top-start",
   showConfirmButton: false,
-  timer: 1000, // auto‑close after 3s
+  timer: 1000,
   timerProgressBar: true,
   background: "rgba(32, 32, 72, 0.85)",
   color: "#fff",
@@ -20,13 +20,15 @@ const Toast = Swal.mixin({
     title: "toast-modern__title",
     icon: "toast-modern__icon",
   },
-  // No pause on hover:
   didOpen: undefined,
 });
 
 const TicketAssign = ({ ticket }) => {
   const [assignees, setAssignees] = useState([]);
   const [selectedAssignee, setSelectedAssignee] = useState("");
+  const [selectedPriority, setSelectedPriority] = useState(
+    ticket.priority || ""
+  );
   const [comment, setComment] = useState("");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -58,8 +60,9 @@ const TicketAssign = ({ ticket }) => {
       const payload = {
         ticketId: ticket.id,
         vendorAdminId: selectedAssignee,
-        statusId: 2,
+        statusId: 2, // Assuming 2 = Assigned
         comment,
+        priority: selectedPriority,
       };
       const res = await apiService.post(
         "/api/tickets/assign-vendor-admin",
@@ -83,11 +86,28 @@ const TicketAssign = ({ ticket }) => {
       ) : error ? (
         <p className="error">{error}</p>
       ) : (
-        <form className="ticket-form" onSubmit={handleSubmit}>
-          <h2>Assign Vendor Admin</h2>
+        <form className="ticket-form-t" onSubmit={handleSubmit}>
+          <div className="assign-section">
+            <label>Priority:</label>
+            <select
+              className="assign-select"
+              value={selectedPriority}
+              onChange={(e) => setSelectedPriority(e.target.value)}
+              required
+            >
+              <option value="">Select Priority</option>
+              {["Low", "Medium", "High", "Critical"].map((priority) => (
+                <option key={priority} value={priority}>
+                  {priority}
+                </option>
+              ))}
+            </select>
+          </div>
+
           <div className="assign-section">
             <label>Assign to Vendor Admin:</label>
             <select
+              className="assign-select"
               value={selectedAssignee}
               onChange={(e) => setSelectedAssignee(e.target.value)}
               required
@@ -100,23 +120,7 @@ const TicketAssign = ({ ticket }) => {
               ))}
             </select>
           </div>
-          <div className="comment-section">
-            <label>Comment:</label>
-            <textarea
-              value={comment}
-              onChange={(e) => setComment(e.target.value)}
-              rows="4"
-              required
-            />
-          </div>
-          <div className="button-group">
-            <button
-              type="button"
-              className="cancel-btn"
-              onClick={() => navigate("/ticket", { replace: true })}
-            >
-              Cancel
-            </button>
+          <div className="button-groupassign">
             <button type="submit" className="submit-btn">
               Assign
             </button>
