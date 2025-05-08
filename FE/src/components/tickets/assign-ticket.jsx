@@ -70,7 +70,7 @@ const TicketAssign = ({ ticket }) => {
       );
       if (res.message) {
         Toast.fire({ icon: "success", title: "Vendor Admin assigned!" });
-        setTimeout(() => navigate("/ticket", { replace: true }), 1000);
+        setTimeout(() => navigate("/tickets?assigned=yes", { replace: true }), 1000);
       } else {
         Toast.fire({ icon: "error", title: "Could not assign vendor admin." });
       }

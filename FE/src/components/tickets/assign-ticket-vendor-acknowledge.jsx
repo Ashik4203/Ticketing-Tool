@@ -45,7 +45,7 @@ const TicketAssignVendorAcknowledged = ({ ticket }) => {
           icon: "success",
           title: "Status updated to In Progress!",
         });
-        setTimeout(() => navigate("/ticket"), 1000);
+        setTimeout(() => navigate("/tickets?assigned=yes", { replace: true }), 1000);
       } else {
         Toast.fire({
           icon: "error",

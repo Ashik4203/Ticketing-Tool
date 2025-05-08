@@ -109,7 +109,6 @@ const Filter = ({ onSearchChange }) => {
               onChange={(e) => handleChange(e, "search")}
             />
           </div>
-
           <div className="filter-group">
             <select
               value={formValues.project_id || ""}

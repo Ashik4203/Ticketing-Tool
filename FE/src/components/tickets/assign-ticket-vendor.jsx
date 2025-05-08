@@ -81,7 +81,7 @@ const TicketAssignVendor = ({ ticket }) => {
           icon: "success",
           title: "Vendor Employee assigned successfully!",
         });
-        setTimeout(() => navigate("/ticket"), 1000);
+        setTimeout(() => navigate("/tickets?assigned=yes", { replace: true }), 1000);
       } else {
         Toast.fire({
           icon: "error",
